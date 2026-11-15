@@ -6,180 +6,134 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Flâneur</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Independent specialty coffee shops in Boston, Sacramento, New York, San Francisco and Mexico City, ranked by what you want from your next cup.">
+<meta name="description" content="Independent specialty coffee shops in Boston, Sacramento, New York, San Francisco and Mexico City.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Instrument+Serif:ital@0;1&family=Schoolbell&display=swap">
 <style>
-/* Layout: a handwritten café guide. Chalk-hand lettering leads, a typewriter face labels,
-   and every shop gets its own painted stripe in vintage-sneaker tones: cream, navy, oxblood, olive, sky, wood. */
+/* Type: PP Neue Montreal (sans) and PP Editorial New (serif) from Pangram Pangram.
+   Drop the .woff2 files into a "fonts" folder next to this page and they take over.
+   Until then the closest free look-alikes load: Inter Tight and Instrument Serif. */
+@font-face { font-family: "PP Neue Montreal"; src: url("fonts/PPNeueMontreal-Book.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("fonts/PPNeueMontreal-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "PP Editorial New"; src: url("fonts/PPEditorialNew-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "PP Editorial New"; src: url("fonts/PPEditorialNew-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+
 :root {
-  /* Black and white lead; oxblood, olive and the stripe tones are small touches */
   --bg: #FFFFFF;
-  --surface: #FAFAFA;
+  --surface: #F6F6F4;
   --ink: #0A0A0A;
   --muted: #6B6B6B;
   --line: #E3E3E3;
-  --accent: #8E2C2A;      /* oxblood */
-  --on-accent: #FFFFFF;
-  --olive: #4D5A33;       /* corduroy green */
-  --olive-soft: #ECEEE2;
-  --shadow: rgba(0, 0, 0, .08);
-  /* card stripes */
-  --s1: #1F2A4A; --s2: #8A2A28; --s3: #55603A; --s4: #8FAACB; --s5: #B5895A;
   /* the only color on the site: café names on the reel tiles */
   --on-ink-red: #F28B82; --on-ink-blue: #8AB4F8; --on-ink-green: #81C995;
   --on-bg-red: #A3271F; --on-bg-blue: #1F4FA8; --on-bg-green: #2E6B34;
-  --oxblood: #8E2C2A;     /* the original red, kept for the city underline */
   --font-hand: "Schoolbell", "Bradley Hand", "Comic Sans MS", cursive;
-  --font-type: var(--font-hand);
+  --font-sans: "PP Neue Montreal", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "PP Editorial New", "Instrument Serif", Georgia, serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000; --surface: #0E0E0E; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
-    --accent: #E07A70; --oxblood: #E07A70; --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995; --on-accent: #000000; --olive: #B5C28D; --olive-soft: #1E2318;
-    --shadow: rgba(255, 255, 255, .06);
-    --s1: #8EA3D6; --s2: #E07A70; --s3: #B5C28D; --s4: #B7CBE3; --s5: #D2A673;
+    --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
+    --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #000000; --surface: #0E0E0E; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
-  --accent: #E07A70; --oxblood: #E07A70; --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995; --on-accent: #000000; --olive: #B5C28D; --olive-soft: #1E2318;
-  --shadow: rgba(255, 255, 255, .06);
-  --s1: #8EA3D6; --s2: #E07A70; --s3: #B5C28D; --s4: #B7CBE3; --s5: #D2A673;
+  --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
+  --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995;
   color-scheme: dark;
-}
-/* Black and white everywhere; the reel tiles are the only color */
-body {
-  --accent: var(--ink); --on-accent: var(--bg);
-  --olive: var(--ink); --olive-soft: var(--line);
-  --s1: var(--ink); --s2: var(--ink); --s3: var(--ink); --s4: var(--ink); --s5: var(--ink);
 }
 
 * { box-sizing: border-box; }
 html, body { background: var(--bg); }
-body { color: var(--ink); font-family: var(--font-hand); font-size: 19px; line-height: 1.4; transition: background-color .25s, color .25s; }
+body { color: var(--ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.4; -webkit-font-smoothing: antialiased; transition: background-color .25s, color .25s; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
 .wrap {
-  max-width: 1200px; margin: 0 auto;
+  max-width: 1280px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-h1, h2, h3 { margin: 0; font-family: var(--font-hand); font-weight: 400; text-wrap: balance; }
+h1, h2, h3 { margin: 0; font-weight: 500; text-wrap: balance; }
 button, a { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.label { font-family: var(--font-type); font-size: 16px; letter-spacing: .02em; color: var(--muted); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.label { font-size: 14px; letter-spacing: .01em; color: var(--muted); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* Sticky header: brand and city tabs */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1.5px dashed var(--line); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 10px; }
-.brand { font-size: 28px; white-space: nowrap; display: flex; align-items: center; gap: 8px; background: none; border: 0; padding: 0; text-decoration: none; }
+.brand { font-family: var(--font-hand); font-size: 28px; white-space: nowrap; text-decoration: none; }
+/* The home page is just the intro: no header, no footer */
+body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 
 .tabs-box { flex: 1; min-width: 0; display: flex; align-items: center; gap: 2px; }
-.tabs-scroll { flex: 1; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--line) transparent; padding-bottom: 4px; margin-bottom: -4px;
+.tabs-scroll { flex: 1; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; margin-bottom: -4px;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%);
           mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%); }
-.tabs-scroll::-webkit-scrollbar { height: 4px; }
-.tabs-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-.tabs { display: flex; gap: 4px; width: max-content; margin-left: auto; }
-.tab { border: 1.5px solid transparent; background: transparent; border-radius: 999px; padding: 4px 14px; font-size: 20px; white-space: nowrap; }
-.tab:hover { border-color: var(--line); }
+.tabs-scroll::-webkit-scrollbar { display: none; }
+.tabs { display: flex; gap: 2px; width: max-content; margin-left: auto; }
+.tab { border-radius: 999px; padding: 5px 12px; font-size: 15px; white-space: nowrap; text-decoration: none; color: var(--muted); transition: color .15s; }
+.tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
-.nudge { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--surface); font-family: var(--font-type); font-size: 15px; line-height: 1; display: grid; place-items: center; padding: 0; }
-.nudge:hover { border-color: var(--ink); }
+.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
 
+/* Views fade in when you switch between home and a city */
+main:not([hidden]) { animation: view-in .5s ease both; }
+@keyframes view-in { from { opacity: 0; transform: translateY(10px); } }
 
-/* Home: big city names on the left, an endless reel of café names on the right */
-.home { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 40%); gap: 36px; padding-block: 28px 0; align-items: start; }
-.cities { list-style: none; margin: 0; padding: 0 0 56px; display: grid; gap: 2px; position: sticky; top: 84px; }
-.cities a { display: inline-flex; align-items: baseline; gap: 16px; font-size: clamp(48px, 7.4vw, 108px); line-height: 1.02; text-decoration: none; color: var(--ink); text-decoration-thickness: 3px; text-underline-offset: .12em; }
-.cities a::after { content: "→"; font-size: .38em; color: var(--accent); opacity: 0; transform: translateX(-8px); transition: opacity .15s, transform .15s; }
-.cities a:hover, .cities a.hot, .cities a:focus-visible { text-decoration-line: underline; text-decoration-color: var(--oxblood); }
-.cities a:hover::after, .cities a.hot::after, .cities a:focus-visible::after { opacity: 1; transform: none; }
-.hero h1 span { color: var(--ink); }
+/* Intro: evenly spaced cities on top, the warped name centered on the screen */
+.intro { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+.intro-nav { position: relative; z-index: 1; display: flex; justify-content: space-around; gap: 12px; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-left, 0px)) 0; font-family: var(--font-hand); font-size: 20px; }
+.intro-nav a { text-decoration: none; white-space: nowrap; transition: opacity .2s; }
+.intro-nav:hover a:not(:hover) { opacity: .35; }
+.intro-nav .short { display: none; }
+.intro-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+.mark { display: flex; justify-content: center; font-family: var(--font-hand); font-weight: 400; font-size: min(23vw, 30vh); line-height: 1; padding-top: .5em; letter-spacing: .02em; -webkit-text-stroke: .045em currentColor; paint-order: stroke fill; }
+.mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 88%;
+  /* --t: -1 at the left edge, 0 in the middle, 1 at the right; --b: 1 in the middle, 0 at the edges */
+  transform: skewX(calc(var(--t) * 24deg)) scaleY(calc(1 + var(--b) * .6)); }
+/* City page: everything centered — the big name, then the cafés */
+.city-hero { padding-block: 56px 36px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.eyebrow { font-size: 14px; color: var(--muted); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.city-hero h1 { font-size: clamp(56px, 11.5vw, 184px); text-transform: uppercase; letter-spacing: -.045em; line-height: .86; }
+.shops { list-style: none; margin: 0 auto; padding: 0 0 72px; max-width: 900px; }
+.shop { border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+.shop:last-child { border-bottom: 1px solid var(--line); }
+.shop.in { opacity: 1; transform: none; }
+.shop a { display: block; text-align: center; padding: 26px 0 24px; text-decoration: none; transition: opacity .25s; }
+.shops:hover .shop a:not(:hover) { opacity: .35; }
+.shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(34px, 5.2vw, 68px); line-height: 1; letter-spacing: -.01em; }
+.shop .meta { display: block; margin-top: 8px; font-size: 15px; color: var(--muted); }
+.shop a:hover .nm, .shop a:focus-visible .nm { font-style: italic; }
 
-.reel { position: sticky; top: 76px; height: calc(100vh - 100px); max-height: 860px; overflow: hidden;
-  -webkit-mask-image: linear-gradient(transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(transparent, #000 7%, #000 93%, transparent); }
-.track { display: flex; flex-direction: column; gap: 14px; animation: reel-y 90s linear infinite; }
-.reel:hover .track { animation-play-state: paused; }
-@keyframes reel-y { to { transform: translateY(calc(-50% - 7px)); } }
-.plate { flex: none; container-type: inline-size; aspect-ratio: 4 / 5; max-width: 100%; display: flex; align-items: flex-end; padding: 18px; border-radius: 2px; text-decoration: none; outline: 2px solid transparent; outline-offset: -2px; transition: outline-color .15s; }
-.plate.wide { aspect-ratio: 5 / 4; }
-.plate.sq { aspect-ratio: 1; }
-.plate.hot .nm, .plate:hover .nm { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .1em; }
-.plate .nm { font-size: 15cqi; line-height: 1; overflow-wrap: anywhere; }
-.p-dark { background: var(--ink); color: var(--bg); }
-.p-light { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
-.p-dark.h-red { color: var(--on-ink-red); } .p-dark.h-blue { color: var(--on-ink-blue); } .p-dark.h-green { color: var(--on-ink-green); }
-.p-light.h-red { color: var(--on-bg-red); } .p-light.h-blue { color: var(--on-bg-blue); } .p-light.h-green { color: var(--on-bg-green); }
-
-/* City hero */
-.hero { padding-block: 40px 28px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 40px; align-items: end; }
-.hero h1 { font-size: clamp(64px, 13vw, 168px); line-height: .9; letter-spacing: -.01em; }
-.scribble { font-size: clamp(22px, 2.4vw, 28px); color: var(--ink); line-height: 1.2; margin-top: 12px; max-width: 36ch; transform: rotate(-1deg); transform-origin: left; }
-.specs { border-top: 2px solid var(--ink); min-width: 180px; margin: 0; }
-.specs div { padding: 10px 16px 10px 0; border-bottom: 1px solid var(--line); }
-.specs dt { font-size: 15px; color: var(--muted); }
-.specs dd { margin: 2px 0 0; font-size: 22px; font-variant-numeric: tabular-nums; }
-
-/* Filters */
-.filters { padding-block: 18px 22px; border-top: 1.5px dashed var(--line); border-bottom: 1.5px dashed var(--line); }
-.filters .label { display: block; margin-bottom: 10px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 16px; font-size: 19px; transition: background-color .15s, color .15s, border-color .15s; }
-.chip:hover { border-color: var(--ink); }
-.chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-
-/* Results: one café per row, stacked top to bottom */
-.results-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-block: 22px 16px; max-width: 860px; }
-.results-head h2 { font-size: 36px; color: var(--ink); }
-.grid { display: flex; flex-direction: column; gap: 18px; padding-bottom: 48px; max-width: 860px; }
-.shop { position: relative; background: var(--surface); border: 1px solid var(--line); border-top: 8px solid var(--stripe, var(--s1)); border-radius: 18px; display: flex; flex-direction: column; min-width: 0; overflow: hidden; transition: transform .2s, box-shadow .2s, border-color .2s; }
-.shop:hover { transform: translateY(-2px); box-shadow: 0 10px 24px var(--shadow); }
-.shop:focus-within { border-color: var(--accent); }
-/* The café name is the map link, stretched to cover the whole card */
-.map-link { text-decoration: none; outline: none; }
-.map-link::after { content: ""; position: absolute; inset: 0; z-index: 0; }
-.shop { cursor: pointer; }
-.body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.rank { font-size: 16px; color: var(--muted); }
-.body h3 { font-size: clamp(34px, 4vw, 42px); line-height: 1; margin-top: 2px; color: var(--ink); }
-.body p { margin: 0; font-size: 19px; line-height: 1.35; }
-.note { font-size: 20px; line-height: 1.25; color: var(--ink); }
-.why { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
-.why span { font-size: 15px; padding: 2px 10px; border-radius: 999px; background: var(--olive-soft); color: var(--ink); }
-
-footer { border-top: 1.5px dashed var(--line); padding-block: 22px 44px; color: var(--muted); }
-footer .wrap { display: flex; justify-content: center; }
+footer { padding-block: 40px 48px; color: var(--muted); }
+footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
 @media (max-width: 760px) {
-  .top .wrap { flex-wrap: wrap; gap: 8px 12px; }
+  .top .wrap { flex-wrap: wrap; gap: 6px 12px; }
   .brand { flex: 1; }
   .tabs-box { order: 3; flex-basis: 100%; }
   .tabs { margin-left: 0; }
-  .hero { grid-template-columns: 1fr; padding-block: 26px 20px; }
-  .specs { min-width: 0; }
-  /* Phones keep the same side-by-side layout: cities left, vertical reel right */
-  .home { grid-template-columns: minmax(0, 1fr) 40%; gap: 14px; padding-top: 16px; }
-  .reel { top: 112px; height: calc(100vh - 136px); height: calc(100svh - 136px); max-height: 680px; }
-  .plate { padding: 10px; }
-  .cities { position: static; gap: 6px; }
-  .cities a { font-size: clamp(28px, 8.6vw, 52px); gap: 8px; line-height: 1; }
+  .intro-nav { justify-content: space-between; }
+  .intro-nav .full { display: none; }
+  .intro-nav .short { display: inline; }
+  .intro-nav { font-size: 18px; }
+  .city-hero { padding-block: 36px 24px; }
+  .shop a { padding-block: 20px 18px; }
 }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
-  .track { animation: none !important; }
-  .reel { overflow: auto; }
+  main:not([hidden]) { animation: none !important; }
+  .shop { opacity: 1; transform: none; }
 }
 </style>
 </head>
 <body>
 
-<header class="top">
+<header class="top" id="top">
   <div class="wrap">
     <a class="brand" href="#home">Flâneur</a>
     <div class="tabs-box">
@@ -193,183 +147,126 @@ footer .wrap { display: flex; justify-content: center; }
 </header>
 
 <main id="home-view" hidden>
-  <div class="wrap home">
-    <nav aria-label="Cities">
-      <h1 class="sr-only">Flâneur</h1>
-      <ul class="cities" id="city-links"></ul>
-    </nav>
-    <div class="reel" id="reel" aria-hidden="true"><div class="track" id="track"></div></div>
-  </div>
+  <section class="intro" id="intro">
+    <nav class="intro-nav" id="intro-nav" aria-label="Cities, quick links"></nav>
+    <div class="intro-stage">
+      <h1 class="mark" id="mark" aria-label="Flâneur"></h1>
+    </div>
+  </section>
 </main>
 
 <main id="city-view" hidden>
-  <section class="wrap hero" id="hero"></section>
-
-  <section class="wrap filters" aria-label="Your preferences">
-    <span class="label" id="mood-label">I'm looking for</span>
-    <div class="chips" id="moods" role="group" aria-labelledby="mood-label"></div>
-  </section>
-
-  <section class="wrap" aria-live="polite">
-    <div class="results-head">
-      <h2 id="results-title">Shortlist</h2>
-      <span class="label" id="count"></span>
-    </div>
-    <div class="grid" id="grid"></div>
+  <section class="wrap city-hero" id="hero"></section>
+  <section class="wrap" aria-label="Cafés">
+    <ul class="shops" id="shops"></ul>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <p class="label" id="foot-cities">Boston · Sacramento · NYC · SF · CDMX</p>
+    <p class="label" style="margin:0">Boston · Sacramento · NYC · SF · CDMX</p>
   </div>
 </footer>
 
 <script>
-const MOODS = [
-  { id: "work",     label: "a place to work" },
-  { id: "espresso", label: "serious espresso" },
-  { id: "pourover", label: "pour-over & light roasts" },
-  { id: "pastry",   label: "bakery & pastries" },
-  { id: "cozy",     label: "cozy, slow, a date" },
-  { id: "quick",    label: "a quick stop" }
-];
-const TAG = { work: "Laptop-friendly", espresso: "Espresso", pourover: "Pour-over", pastry: "Bakery", cozy: "Cozy", quick: "In & out" };
-
-// Independent specialty shops rated 4.0+ on Yelp, Nov 2026. Attribute scores 0–3 are editorial judgments.
+// Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
+// blurb, note and the a{} scores are kept in the data but no longer shown.
 const CITIES = [
   { id: "boston", name: "Boston", region: "Massachusetts", tz: "America/New_York",
-    scribble: "Cold mornings, good espresso, and a café on every corner downtown.",
     shops: [
-      { name: "Cicada Coffee Bar", hood: "Cambridge", site: "https://www.cicadacoffeebar.com",
-        know: "Vietnamese coffee bar",
+      { name: "Cicada Coffee Bar", hood: "Cambridge", know: "Vietnamese coffee bar",
         blurb: "Vietnamese-inspired café just across the river, pouring Nguyen Coffee Supply beans. Named Boston Magazine's Best Coffee Shop in 2022 and 2023.",
         note: "Try the egg coffee or a cà phê sữa đá.", a: { work: 1, espresso: 2, pourover: 1, pastry: 2, cozy: 3, quick: 1 } },
-      { name: "Gracenote Coffee", hood: "Leather District", site: "https://gracenotecoffee.com",
-        know: "Espresso bar and roaster",
+      { name: "Gracenote Coffee", hood: "Leather District", know: "Espresso bar and roaster",
         blurb: "A small bar near South Station from a Boston roaster known for bright, carefully roasted coffee.",
         note: "Tiny room. Take it to go and walk.", a: { work: 0, espresso: 3, pourover: 2, pastry: 0, cozy: 0, quick: 3 } },
-      { name: "Ogawa Coffee", hood: "Downtown", site: "https://www.ogawacoffeeusa.com",
-        know: "Latte art, Kyoto roaster",
+      { name: "Ogawa Coffee", hood: "Downtown", know: "Latte art, Kyoto roaster",
         blurb: "The Boston outpost of a Kyoto roaster, with a big room downtown and some of the city's best latte art.",
         note: "Watch the baristas pour.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 1, quick: 1 } },
-      { name: "George Howell Coffee", hood: "Downtown Crossing", site: "https://georgehowellcoffee.com",
-        know: "Single-origin pour-overs",
+      { name: "George Howell Coffee", hood: "Downtown Crossing", know: "Single-origin pour-overs",
         blurb: "Coffee from one of the people who started the specialty movement in New England. The menu reads like a wine list.",
         note: "Order whatever's on the brew bar that day.", a: { work: 1, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
     ] },
   { id: "sacramento", name: "Sacramento", region: "California", tz: "America/Los_Angeles",
-    scribble: "Hot afternoons, so the iced drinks here are taken seriously.",
     shops: [
-      { name: "Offbeat Coffee", hood: "Land Park", site: null,
-        know: "Pop-up turned shop",
+      { name: "Offbeat Coffee", hood: "Land Park", know: "Pop-up turned shop",
         blurb: "Started as a pop-up and opened in Land Park in 2025. Owned by Vivian Tran and Thao Nguyen.",
         note: "New and already a local favorite.", a: { work: 1, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
-      { name: "Milka Coffee Roasters", hood: "Mansion Flats", site: "https://www.milkacoffee.com",
-        know: "Downtown roaster",
+      { name: "Milka Coffee Roasters", hood: "Mansion Flats", know: "Downtown roaster",
         blurb: "A downtown roaster and café made in Mansion Flats, with a loyal crowd of regulars.",
         note: "Ask what they roasted this week.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 1 } },
-      { name: "Pachamama Coffee", hood: "East Sacramento", site: "https://pachamamacoffee.com",
-        know: "Farmer-owned, organic",
+      { name: "Pachamama Coffee", hood: "East Sacramento", know: "Farmer-owned, organic",
         blurb: "A cooperative owned by the farmers who grow the coffee. Everything is organic.",
         note: "The money goes back to the growers.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 1, quick: 2 } },
-      { name: "Mast Coffee", hood: "Sacramento", site: null,
-        know: "Specialty café",
+      { name: "Mast Coffee", hood: "Sacramento", know: "Specialty café",
         blurb: "A well-reviewed independent café with a focused specialty menu.",
         note: "Good espresso, calm room.", a: { work: 2, espresso: 3, pourover: 1, pastry: 1, cozy: 2, quick: 1 } },
-      { name: "Temple Coffee Roasters", hood: "Downtown", site: "https://templecoffee.com",
-        know: "Hometown roaster",
+      { name: "Temple Coffee Roasters", hood: "Downtown", know: "Hometown roaster",
         blurb: "Sacramento's best-known roaster. Roomy cafés, a long brew menu and plenty of tables.",
         note: "Good spot to sit and work for a few hours.", a: { work: 3, espresso: 2, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
     ] },
   { id: "nyc", name: "New York", region: "New York", tz: "America/New_York",
-    scribble: "Start in the East Village, finish in Brooklyn, and walk between them.",
     shops: [
-      { name: "Coffee Project New York", hood: "East Village", site: "https://coffeeprojectny.com",
-        know: "Roaster with a training academy",
+      { name: "Coffee Project New York", hood: "East Village", know: "Roaster with a training academy",
         blurb: "A small East Village café from a roaster that also runs a coffee school. Inventive drinks, done carefully.",
         note: "Ask about the signature drinks.", a: { work: 1, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 2 } },
-      { name: "Koré Coffee", hood: "Chinatown", site: null,
-        know: "Neighborhood specialty café",
+      { name: "Koré Coffee", hood: "Chinatown", know: "Neighborhood specialty café",
         blurb: "A small Chinatown café with one of the highest Yelp ratings in the city.",
         note: "Worth the detour downtown.", a: { work: 1, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
-      { name: "La Cabra", hood: "East Village", site: "https://us.lacabra.com",
-        know: "Danish roaster, cardamom buns",
+      { name: "La Cabra", hood: "East Village", know: "Danish roaster, cardamom buns",
         blurb: "Light-roast coffee from Aarhus, Denmark, with a bakery behind the counter. Copenhagen calm in Manhattan.",
         note: "Cardamom bun and a filter coffee.", a: { work: 0, espresso: 2, pourover: 3, pastry: 3, cozy: 1, quick: 2 } },
-      { name: "Culture Espresso", hood: "Midtown West", site: "https://www.cultureespresso.com",
-        know: "Espresso and famous cookies",
+      { name: "Culture Espresso", hood: "Midtown West", know: "Espresso and famous cookies",
         blurb: "A Midtown favorite for solid espresso and chocolate chip cookies baked in-house.",
         note: "Get the cookie warm.", a: { work: 1, espresso: 3, pourover: 1, pastry: 3, cozy: 1, quick: 3 } },
-      { name: "Sey Coffee", hood: "East Williamsburg", site: "https://www.seycoffee.com",
-        know: "Very light roasts",
+      { name: "Sey Coffee", hood: "East Williamsburg", know: "Very light roasts",
         blurb: "An airy roastery with some of the lightest, fruitiest coffee in the city.",
         note: "If you like it bright, this is the one.", a: { work: 1, espresso: 2, pourover: 3, pastry: 0, cozy: 1, quick: 1 } },
-      { name: "Devoción", hood: "Williamsburg", site: "https://www.devocion.com",
-        know: "Fresh Colombian beans",
+      { name: "Devoción", hood: "Williamsburg", know: "Fresh Colombian beans",
         blurb: "Colombian coffee roasted in Brooklyn, served under a big skylight full of plants.",
         note: "Sit under the skylight.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 3, quick: 1 } }
     ] },
   { id: "sf", name: "San Francisco", region: "California", tz: "America/Los_Angeles",
-    scribble: "Fog till noon, so drink it hot and walk the hills.",
     shops: [
-      { name: "The Coffee Movement", hood: "Nob Hill", site: "https://www.thecoffeemovement.com",
-        know: "Small specialty bar",
+      { name: "The Coffee Movement", hood: "Nob Hill", know: "Small specialty bar",
         blurb: "A tiny bar with a focused menu of carefully made espresso and filter coffee.",
         note: "Small space, big flavor.", a: { work: 0, espresso: 3, pourover: 3, pastry: 0, cozy: 1, quick: 3 } },
-      { name: "Hedge Coffee", hood: "Mission", site: null,
-        know: "Pop-up turned big room",
+      { name: "Hedge Coffee", hood: "Mission", know: "Pop-up turned big room",
         blurb: "Grew from pop-ups into a 4,000 sq ft space on Shotwell Street in 2025.",
         note: "Plenty of room to stay a while.", a: { work: 3, espresso: 2, pourover: 2, pastry: 1, cozy: 2, quick: 1 } },
-      { name: "Saint Frank", hood: "Russian Hill", site: "https://www.saintfrankcoffee.com",
-        know: "Light, airy room",
+      { name: "Saint Frank", hood: "Russian Hill", know: "Light, airy room",
         blurb: "White walls, wood and a sunny room on Polk Street. Calm, polished and easy to love.",
         note: "Window seat in the afternoon.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 3, quick: 1 } },
-      { name: "Snowbird Coffee", hood: "Inner Sunset", site: "https://www.snowbirdcoffee.com",
-        know: "Neighborhood roaster",
+      { name: "Snowbird Coffee", hood: "Inner Sunset", know: "Neighborhood roaster",
         blurb: "A friendly Inner Sunset café, a short walk from Golden Gate Park.",
         note: "Take it to the park.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
-      { name: "Linea Caffe", hood: "Mission", site: "https://lineacaffe.com",
-        know: "Organic roaster, espresso bar",
+      { name: "Linea Caffe", hood: "Mission", know: "Organic roaster, espresso bar",
         blurb: "A small corner bar from a veteran organic roaster. Mostly espresso, done very well.",
         note: "Small menu, all good.", a: { work: 0, espresso: 3, pourover: 1, pastry: 1, cozy: 0, quick: 3 } }
     ] },
   { id: "cdmx", name: "Ciudad de México", region: "México", tz: "America/Mexico_City",
-    scribble: "High altitude, so water boils cooler and brews pull a little differently.",
     shops: [
-      { name: "Qūentin Café", hood: "Condesa", site: null,
-        know: "Specialty espresso, banana bread",
+      { name: "Qūentin Café", hood: "Condesa", know: "Specialty espresso, banana bread",
         blurb: "One of the cafés that shaped the city's modern specialty scene. Very consistent espresso.",
         note: "Get the banana bread.", a: { work: 1, espresso: 3, pourover: 2, pastry: 2, cozy: 2, quick: 2 } },
-      { name: "Buna", hood: "Roma Norte", site: "https://buna.mx",
-        know: "Mexican roaster",
+      { name: "Buna", hood: "Roma Norte", know: "Mexican roaster",
         blurb: "Roma Norte coffee bar on Orizaba from a roaster that buys Mexican beans and roasts them in the city. Its blends carry Nahuatl names.",
         note: "Buy a bag to take home.", a: { work: 2, espresso: 2, pourover: 3, pastry: 1, cozy: 1, quick: 2 } }
     ] }
 ];
 
-const store = {
-  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
-};
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const state = { city: null }; // null = home page
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-const state = {
-  city: null, // null = home page
-  moods: new Set(store.get("tp2-moods", ["espresso"])),
-};
-
-const STRIPES = ["--s1", "--s2", "--s3", "--s4", "--s5"];
 const shortName = (c) => ({ cdmx: "CDMX", nyc: "NYC", sf: "SF" }[c.id] || c.name);
+const mapsUrl = (s, c) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.name} ${s.hood} ${c.name}`);
 function localTime(tz) {
   try { return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: tz }).format(new Date()); }
   catch (e) { return "—"; }
 }
-function pickView() {
-  state.city = CITIES.find((c) => c.id === location.hash.slice(1)) || null;
-}
-
+function pickView() { state.city = CITIES.find((c) => c.id === location.hash.slice(1)) || null; }
 
 /* City tabs with visible scroll affordances */
 function renderTabs() {
@@ -399,7 +296,6 @@ function updateNudges() {
   const sc = $("tabs-scroll");
   sc.addEventListener("scroll", updateNudges, { passive: true });
   window.addEventListener("resize", updateNudges);
-  // A vertical mouse wheel scrolls the city row sideways
   sc.addEventListener("wheel", (e) => {
     if (sc.scrollWidth <= sc.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
     e.preventDefault(); sc.scrollLeft += e.deltaY;
@@ -408,77 +304,37 @@ function updateNudges() {
   $("nudge-right").addEventListener("click", () => sc.scrollBy({ left: 160 }));
 })();
 
-/* Home page */
-const PLATE_SHAPES = ["", "wide", "sq", ""];
-const PLATE_KINDS = ["p-dark", "p-light"];
-// Tiles stay black or white; the café name is plain, red, blue or green
-const PLATE_HUES = ["h-red", "", "h-blue", "h-green", ""];
-function plate(s, c, n) {
-  const shape = PLATE_SHAPES[n % PLATE_SHAPES.length];
-  const kind = PLATE_KINDS[n % PLATE_KINDS.length] + " " + PLATE_HUES[n % PLATE_HUES.length];
-  return `<a class="plate ${shape} ${kind}" href="${mapsUrl(s, c)}" target="_blank" rel="noopener" tabindex="-1" data-city="${c.id}" title="${esc(s.name)} in Maps" style="--stripe:var(${STRIPES[n % STRIPES.length]})"><span class="nm">${esc(s.name)}</span></a>`;
+/* Intro */
+function renderIntro() {
+  $("intro-nav").innerHTML = CITIES.map((c) =>
+    `<a href="#${c.id}"><span class="full">${esc(c.name)}</span><span class="short">${esc(shortName(c))}</span></a>`).join("");
+  const letters = [..."Flâneur"], mid = (letters.length - 1) / 2;
+  $("mark").innerHTML = letters.map((ch, i) => {
+    const t = (i - mid) / mid;
+    return `<span aria-hidden="true" style="--t:${t.toFixed(3)};--b:${(1 - t * t).toFixed(3)}">${esc(ch)}</span>`;
+  }).join("");
 }
-function renderHome() {
-  $("city-links").innerHTML = CITIES.map((c) => `<li><a href="#${c.id}" data-city="${c.id}">${esc(c.name)}</a></li>`).join("");
-  const plates = [];
-  let n = 0;
-  CITIES.forEach((c) => c.shops.forEach((s) => plates.push(plate(s, c, n++))));
-  // Shuffle the reel so neighbors come from different cities, then loop it twice for a seamless scroll.
-  // The step must share no factor with the plate count, or some cafés would be skipped.
-  const gcd = (a, b) => (b ? gcd(b, a % b) : a);
-  let step = 7; while (gcd(step, plates.length) !== 1) step++;
-  const mixed = plates.map((_, i) => plates[(i * step) % plates.length]).join("");
-  $("track").innerHTML = mixed + mixed;
-}
-// Pointing at a city lights up its cafés in the reel, and the other way round
-function hot(id) {
-  document.querySelectorAll("#home-view [data-city]").forEach((el) => el.classList.toggle("hot", !!id && el.dataset.city === id));
-}
-["city-links", "track"].forEach((k) => {
-  $(k).addEventListener("mouseover", (e) => { const t = e.target.closest("[data-city]"); hot(t && t.dataset.city); });
-  $(k).addEventListener("mouseleave", () => hot(null));
-});
 
 /* City page */
-function renderHero() {
+const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
+  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); reveal.unobserve(e.target); } });
+}, { rootMargin: "0px 0px -6% 0px" }) : null;
+
+function renderCity() {
   const c = state.city;
   $("hero").innerHTML = `
-    <div>
-      <div class="label">${esc(c.region)} · coffee guide</div>
-      <h1>${esc(c.name)}<span>.</span></h1>
-      <div class="scribble">${esc(c.scribble)}</div>
-    </div>
-    <dl class="specs">
-      <div><dt>Local time</dt><dd id="clock">${localTime(c.tz)}</dd></div>
-    </dl>`;
-}
-function renderControls() {
-  $("moods").innerHTML = MOODS.map((m) =>
-    `<button type="button" class="chip" id="mood-${m.id}" data-mood="${m.id}" aria-pressed="${state.moods.has(m.id)}">${m.label}</button>`).join("");
-}
-function fit(s) { let pts = 0; state.moods.forEach((m) => { pts += s.a[m]; }); return pts; }
-const mapsUrl = (s, c) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.name} ${s.hood} ${c.name}`);
-
-function renderShops() {
-  const c = state.city;
-  if (!c) return;
-  const ranked = c.shops.map((s, i) => ({ s, i, f: fit(s) })).sort((a, b) => b.f - a.f || a.i - b.i);
-  $("results-title").textContent = `${shortName(c)} shortlist`;
-  $("count").textContent = state.moods.size ? "sorted by what you picked" : "";
-  $("grid").innerHTML = ranked.map(({ s, i }, rank) => {
-    const tags = Object.entries(s.a).filter(([, v]) => v >= 2).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k]) => TAG[k]);
-    const stripe = STRIPES[(i + CITIES.indexOf(c) * 2) % STRIPES.length];
-    return `<article class="shop" style="--stripe:var(${stripe})">
-      <div class="body">
-        <span class="rank">#${rank + 1}</span>
-        <h3><a class="map-link" href="${mapsUrl(s, c)}" target="_blank" rel="noopener">${esc(s.name)}</a></h3>
-        <div class="label">${esc(s.hood)} · ${esc(s.know)}</div>
-        <p>${esc(s.blurb)}</p>
-        <div class="note">→ ${esc(s.note)}</div>
-        <div class="why">${tags.map((t) => `<span>${t}</span>`).join("")}</div>
-      </div>
-    </article>`;
-  }).join("");
+    <div class="eyebrow">${esc(c.region)} · <span id="clock">${localTime(c.tz)}</span></div>
+    <h1>${esc(c.name)}</h1>`;
+  $("shops").innerHTML = c.shops.map((s, i) => `
+    <li class="shop" style="--d:${Math.min(i, 6) * 90}ms">
+      <a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">
+        <span class="nm">${esc(s.name)}</span>
+        <span class="meta">${esc(s.hood)} · ${esc(s.know)}</span>
+      </a>
+    </li>`).join("");
+  document.querySelectorAll(".shop").forEach((el) => {
+    if (!reveal || reduceMotion.matches) el.classList.add("in"); else reveal.observe(el);
+  });
 }
 
 function renderAll() {
@@ -487,27 +343,15 @@ function renderAll() {
   $("city-view").hidden = home;
   document.body.dataset.view = home ? "home" : "city";
   renderTabs();
-  if (home) renderHome(); else { renderHero(); renderShops(); }
+  if (!home) renderCity();
 }
 
-document.addEventListener("click", (e) => {
-  const m = e.target.closest("[data-mood]");
-  if (m) {
-    const id = m.dataset.mood;
-    state.moods.has(id) ? state.moods.delete(id) : state.moods.add(id);
-    m.setAttribute("aria-pressed", state.moods.has(id));
-    store.set("tp2-moods", [...state.moods]); renderShops(); return;
-  }
-});
-
 window.addEventListener("hashchange", () => { pickView(); renderAll(); window.scrollTo(0, 0); });
-setInterval(() => {
-  const el = $("clock"); if (el && state.city) el.textContent = localTime(state.city.tz);
-}, 30000);
+setInterval(() => { const el = $("clock"); if (el && state.city) el.textContent = localTime(state.city.tz); }, 30000);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateNudges);
 
 pickView();
-renderControls();
+renderIntro();
 renderAll();
 </script>
 </body>
