@@ -91,10 +91,18 @@ main:not([hidden]) { animation: view-in .5s ease both; }
 .intro-nav:hover a:not(:hover) { opacity: .35; }
 .intro-nav .short { display: none; }
 .intro-stage { position: absolute; inset: 0; display: grid; place-items: center; }
-.mark { display: flex; justify-content: center; font-family: var(--font-hand); font-weight: 400; font-size: min(23vw, 30vh); line-height: 1; padding-top: .5em; letter-spacing: .02em; -webkit-text-stroke: .045em currentColor; paint-order: stroke fill; }
-.mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 88%;
+
+/* The name in 3D perspective: the row is viewed from above, and each letter tips
+   back on its baseline and fans outward. */
+.mark { display: flex; justify-content: center; font-family: var(--font-hand); font-weight: 400; font-size: min(23vw, 30vh); line-height: 1; padding-top: .5em; letter-spacing: .02em; -webkit-text-stroke: .045em currentColor; paint-order: stroke fill;
+  perspective: 3.2em; perspective-origin: 50% -40%; transform-style: preserve-3d; }
+.mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 100%;
   /* --t: -1 at the left edge, 0 in the middle, 1 at the right; --b: 1 in the middle, 0 at the edges */
-  transform: skewX(calc(var(--t) * 24deg)) scaleY(calc(1 + var(--b) * .6)); }
+  transform: rotateX(34deg) skewX(calc(var(--t) * 24deg)) scaleY(calc(1.35 + var(--b) * .6)); }
+@media (prefers-reduced-motion: no-preference) {
+  .mark span { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc((var(--t) + 1) * 70ms); }
+  @keyframes rise { from { opacity: 0; transform: rotateX(80deg) skewX(calc(var(--t) * 24deg)) scaleY(calc(1.35 + var(--b) * .6)); } }
+}
 /* City page: just the cafés, centered */
 .shops { list-style: none; margin: 0 auto; padding: 56px 0 72px; max-width: 900px; }
 .shop { border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
@@ -193,6 +201,9 @@ const CITIES = [
       { name: "Milka Coffee Roasters", hood: "Mansion Flats", know: "Downtown roaster",
         blurb: "A downtown roaster and café made in Mansion Flats, with a loyal crowd of regulars.",
         note: "Ask what they roasted this week.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 1 } },
+      { name: "Camellia Coffee", hood: "R Street", know: "Local roaster, R Street café",
+        blurb: "A Sacramento roaster with its café on R Street near the Capitol, in the WAL Public Market building.",
+        note: "Grab a bag of whatever's freshly roasted.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
       { name: "Pachamama Coffee", hood: "East Sacramento", know: "Farmer-owned, organic",
         blurb: "A cooperative owned by the farmers who grow the coffee. Everything is organic.",
         note: "The money goes back to the growers.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 1, quick: 2 } },
@@ -205,24 +216,15 @@ const CITIES = [
     ] },
   { id: "nyc", name: "New York", region: "New York", tz: "America/New_York",
     shops: [
-      { name: "Coffee Project New York", hood: "East Village", know: "Roaster with a training academy",
-        blurb: "A small East Village café from a roaster that also runs a coffee school. Inventive drinks, done carefully.",
-        note: "Ask about the signature drinks.", a: { work: 1, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 2 } },
-      { name: "Koré Coffee", hood: "Chinatown", know: "Neighborhood specialty café",
-        blurb: "A small Chinatown café with one of the highest Yelp ratings in the city.",
-        note: "Worth the detour downtown.", a: { work: 1, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
       { name: "La Cabra", hood: "East Village", know: "Danish roaster, cardamom buns",
         blurb: "Light-roast coffee from Aarhus, Denmark, with a bakery behind the counter. Copenhagen calm in Manhattan.",
         note: "Cardamom bun and a filter coffee.", a: { work: 0, espresso: 2, pourover: 3, pastry: 3, cozy: 1, quick: 2 } },
-      { name: "Culture Espresso", hood: "Midtown West", know: "Espresso and famous cookies",
-        blurb: "A Midtown favorite for solid espresso and chocolate chip cookies baked in-house.",
-        note: "Get the cookie warm.", a: { work: 1, espresso: 3, pourover: 1, pastry: 3, cozy: 1, quick: 3 } },
       { name: "Sey Coffee", hood: "East Williamsburg", know: "Very light roasts",
         blurb: "An airy roastery with some of the lightest, fruitiest coffee in the city.",
         note: "If you like it bright, this is the one.", a: { work: 1, espresso: 2, pourover: 3, pastry: 0, cozy: 1, quick: 1 } },
-      { name: "Devoción", hood: "Williamsburg", know: "Fresh Colombian beans",
-        blurb: "Colombian coffee roasted in Brooklyn, served under a big skylight full of plants.",
-        note: "Sit under the skylight.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 3, quick: 1 } }
+      { name: "Arcane Estate Coffee", hood: "West Village", know: "Panamanian estate coffee",
+        blurb: "A tiny Cornelia Street bar pouring coffee from Panama. Named to the World's 100 Best Coffee Shops within a year of opening.",
+        note: "Small room. Ask about the Geisha.", a: { work: 0, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 2 } }
     ] },
   { id: "sf", name: "San Francisco", region: "California", tz: "America/Los_Angeles",
     shops: [
@@ -235,21 +237,18 @@ const CITIES = [
       { name: "Saint Frank", hood: "Russian Hill", know: "Light, airy room",
         blurb: "White walls, wood and a sunny room on Polk Street. Calm, polished and easy to love.",
         note: "Window seat in the afternoon.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 3, quick: 1 } },
-      { name: "Snowbird Coffee", hood: "Inner Sunset", know: "Neighborhood roaster",
-        blurb: "A friendly Inner Sunset café, a short walk from Golden Gate Park.",
-        note: "Take it to the park.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
       { name: "Linea Caffe", hood: "Mission", know: "Organic roaster, espresso bar",
         blurb: "A small corner bar from a veteran organic roaster. Mostly espresso, done very well.",
         note: "Small menu, all good.", a: { work: 0, espresso: 3, pourover: 1, pastry: 1, cozy: 0, quick: 3 } }
     ] },
   { id: "cdmx", name: "Ciudad de México", region: "México", tz: "America/Mexico_City",
     shops: [
-      { name: "Qūentin Café", hood: "Condesa", know: "Specialty espresso, banana bread",
-        blurb: "One of the cafés that shaped the city's modern specialty scene. Very consistent espresso.",
-        note: "Get the banana bread.", a: { work: 1, espresso: 3, pourover: 2, pastry: 2, cozy: 2, quick: 2 } },
-      { name: "Buna", hood: "Roma Norte", know: "Mexican roaster",
-        blurb: "Roma Norte coffee bar on Orizaba from a roaster that buys Mexican beans and roasts them in the city. Its blends carry Nahuatl names.",
-        note: "Buy a bag to take home.", a: { work: 2, espresso: 2, pourover: 3, pastry: 1, cozy: 1, quick: 2 } }
+      { name: "Café Tormenta", hood: "Roma Norte", know: "Street-corner coffee stand",
+        blurb: "A tiny stand on the corner of Puebla and Mérida that brings back the city's tradition of street coffee, with good music playing.",
+        note: "Drink it on the corner.", a: { work: 0, espresso: 2, pourover: 1, pastry: 0, cozy: 1, quick: 3 } },
+      { name: "El Minutito", hood: "Juárez", know: "Stand-up café-bar",
+        blurb: "A vintage, European-style café-bar on Londres where you drink standing up, with 60s music and pressed sandwiches.",
+        note: "Get the sándwich planchado.", a: { work: 0, espresso: 2, pourover: 1, pastry: 1, cozy: 2, quick: 3 } }
     ] }
 ];
 
