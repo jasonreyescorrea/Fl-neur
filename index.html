@@ -95,11 +95,8 @@ main:not([hidden]) { animation: view-in .5s ease both; }
 .mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 88%;
   /* --t: -1 at the left edge, 0 in the middle, 1 at the right; --b: 1 in the middle, 0 at the edges */
   transform: skewX(calc(var(--t) * 24deg)) scaleY(calc(1 + var(--b) * .6)); }
-/* City page: everything centered — the big name, then the cafés */
-.city-hero { padding-block: 56px 36px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.eyebrow { font-size: 14px; color: var(--muted); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
-.city-hero h1 { font-size: clamp(56px, 11.5vw, 184px); text-transform: uppercase; letter-spacing: -.045em; line-height: .86; }
-.shops { list-style: none; margin: 0 auto; padding: 0 0 72px; max-width: 900px; }
+/* City page: just the cafés, centered */
+.shops { list-style: none; margin: 0 auto; padding: 56px 0 72px; max-width: 900px; }
 .shop { border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
 .shop:last-child { border-bottom: 1px solid var(--line); }
 .shop.in { opacity: 1; transform: none; }
@@ -121,7 +118,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
   .intro-nav .full { display: none; }
   .intro-nav .short { display: inline; }
   .intro-nav { font-size: 18px; }
-  .city-hero { padding-block: 36px 24px; }
+  .shops { padding-top: 32px; }
   .shop a { padding-block: 20px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -156,7 +153,8 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 </main>
 
 <main id="city-view" hidden>
-  <section class="wrap city-hero" id="hero"></section>
+  <!-- City name kept for screen readers only; the selected tab shows it visually -->
+  <h1 class="sr-only" id="city-title"></h1>
   <section class="wrap" aria-label="Cafés">
     <ul class="shops" id="shops"></ul>
   </section>
@@ -262,10 +260,6 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const shortName = (c) => ({ cdmx: "CDMX", nyc: "NYC", sf: "SF" }[c.id] || c.name);
 const mapsUrl = (s, c) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.name} ${s.hood} ${c.name}`);
-function localTime(tz) {
-  try { return new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: tz }).format(new Date()); }
-  catch (e) { return "—"; }
-}
 function pickView() { state.city = CITIES.find((c) => c.id === location.hash.slice(1)) || null; }
 
 /* City tabs with visible scroll affordances */
@@ -322,9 +316,7 @@ const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entr
 
 function renderCity() {
   const c = state.city;
-  $("hero").innerHTML = `
-    <div class="eyebrow">${esc(c.region)} · <span id="clock">${localTime(c.tz)}</span></div>
-    <h1>${esc(c.name)}</h1>`;
+  $("city-title").textContent = c.name;
   $("shops").innerHTML = c.shops.map((s, i) => `
     <li class="shop" style="--d:${Math.min(i, 6) * 90}ms">
       <a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">
@@ -347,7 +339,6 @@ function renderAll() {
 }
 
 window.addEventListener("hashchange", () => { pickView(); renderAll(); window.scrollTo(0, 0); });
-setInterval(() => { const el = $("clock"); if (el && state.city) el.textContent = localTime(state.city.tz); }, 30000);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateNudges);
 
 pickView();
