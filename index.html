@@ -25,9 +25,6 @@
   --ink: #0A0A0A;
   --muted: #6B6B6B;
   --line: #E3E3E3;
-  /* the only color on the site: café names on the reel tiles */
-  --on-ink-red: #F28B82; --on-ink-blue: #8AB4F8; --on-ink-green: #81C995;
-  --on-bg-red: #A3271F; --on-bg-blue: #1F4FA8; --on-bg-green: #2E6B34;
   --font-hand: "Schoolbell", "Bradley Hand", "Comic Sans MS", cursive;
   --font-sans: "PP Neue Montreal", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "PP Editorial New", "Instrument Serif", Georgia, serif;
@@ -36,13 +33,11 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
-    --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
-  --on-ink-red: #A3271F; --on-ink-blue: #1F4FA8; --on-ink-green: #2E6B34; --on-bg-red: #F28B82; --on-bg-blue: #8AB4F8; --on-bg-green: #81C995;
   color-scheme: dark;
 }
 
@@ -61,6 +56,17 @@ button { cursor: pointer; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .label { font-size: 14px; letter-spacing: .01em; color: var(--muted); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Intro reel: plays full screen when the site opens on the home page, then fades away */
+.reel { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; background: #000; transition: opacity .8s ease; }
+.reel.out { opacity: 0; pointer-events: none; }
+.reel canvas { display: block; width: min(100vw, 100vh * 16 / 9); width: min(100vw, 100svh * 16 / 9); height: auto; aspect-ratio: 16 / 9; }
+.reel-skip { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  padding: 6px 14px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; background: none; color: #F4F2EE;
+  font-size: 14px; -webkit-user-select: none; user-select: none; transition: border-color .2s; }
+.reel-skip:hover { border-color: rgba(255,255,255,.7); }
+.reel-skip:focus-visible { outline-color: #F4F2EE; }
+body.reel-on { overflow: hidden; }
 
 /* Sticky header: brand and city tabs */
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
@@ -84,25 +90,20 @@ body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 main:not([hidden]) { animation: view-in .5s ease both; }
 @keyframes view-in { from { opacity: 0; transform: translateY(10px); } }
 
-/* Intro: evenly spaced cities on top, the warped name centered on the screen */
+/* Home: evenly spaced cities on top, the warped name centered on the screen */
 .intro { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
 .intro-nav { position: relative; z-index: 1; display: flex; justify-content: space-around; gap: 12px; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-left, 0px)) 0; font-family: var(--font-hand); font-size: 20px; }
 .intro-nav a { text-decoration: none; white-space: nowrap; transition: opacity .2s; }
 .intro-nav:hover a:not(:hover) { opacity: .35; }
 .intro-nav .short { display: none; }
 .intro-stage { position: absolute; inset: 0; display: grid; place-items: center; }
-
-/* The name in 3D perspective: the row is viewed from above, and each letter tips
-   back on its baseline and fans outward. */
-.mark { display: flex; justify-content: center; font-family: var(--font-hand); font-weight: 400; font-size: min(23vw, 30vh); line-height: 1; padding-top: .5em; letter-spacing: .02em; -webkit-text-stroke: .045em currentColor; paint-order: stroke fill;
-  perspective: 3.2em; perspective-origin: 50% -40%; transform-style: preserve-3d; }
-.mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 100%;
+.mark { display: flex; justify-content: center; font-family: var(--font-hand); font-weight: 400; font-size: min(23vw, 30vh); line-height: 1; letter-spacing: .02em;
+  -webkit-text-stroke: .045em currentColor; paint-order: stroke fill;
+  translate: 0 .12em; /* the warp stretches letters upward, so nudge the word down to look centered */ }
+.mark span { display: inline-block; margin-inline: .05em; transform-origin: 50% 88%;
   /* --t: -1 at the left edge, 0 in the middle, 1 at the right; --b: 1 in the middle, 0 at the edges */
-  transform: rotateX(34deg) skewX(calc(var(--t) * 24deg)) scaleY(calc(1.35 + var(--b) * .6)); }
-@media (prefers-reduced-motion: no-preference) {
-  .mark span { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc((var(--t) + 1) * 70ms); }
-  @keyframes rise { from { opacity: 0; transform: rotateX(80deg) skewX(calc(var(--t) * 24deg)) scaleY(calc(1.35 + var(--b) * .6)); } }
-}
+  transform: skewX(calc(var(--t) * 24deg)) scaleY(calc(1 + var(--b) * .6)); }
+
 /* City page: just the cafés, centered */
 .shops { list-style: none; margin: 0 auto; padding: 56px 0 72px; max-width: 900px; }
 .shop { border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
@@ -137,6 +138,11 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 </style>
 </head>
 <body>
+
+<div class="reel" id="reel" hidden>
+  <canvas id="reel-cv" aria-label="Flâneur intro: a café sign, then Boston, New York, San Francisco, Sacramento and Mexico City"></canvas>
+  <button type="button" class="reel-skip" id="reel-skip">Skip</button>
+</div>
 
 <header class="top" id="top">
   <div class="wrap">
@@ -176,7 +182,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 
 <script>
 // Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
-// blurb, note and the a{} scores are kept in the data but no longer shown.
+// blurb, note and the a{} scores are kept in the data but not shown.
 const CITIES = [
   { id: "boston", name: "Boston", region: "Massachusetts", tz: "America/New_York",
     shops: [
@@ -297,7 +303,7 @@ function updateNudges() {
   $("nudge-right").addEventListener("click", () => sc.scrollBy({ left: 160 }));
 })();
 
-/* Intro */
+/* Home */
 function renderIntro() {
   $("intro-nav").innerHTML = CITIES.map((c) =>
     `<a href="#${c.id}"><span class="full">${esc(c.name)}</span><span class="short">${esc(shortName(c))}</span></a>`).join("");
@@ -343,7 +349,186 @@ if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateNudg
 pickView();
 renderIntro();
 renderAll();
+
+/* ============================================================
+   INTRO REEL (15s). Plays full screen the first time per visit
+   that the site opens on the home page, then fades to the home page.
+   Skipped for people who turn off motion. Everything is drawn by
+   render(t), a function of time, on a 1920×1080 canvas.
+   ============================================================ */
+(function introReel() {
+  const SEEN_KEY = "flaneur-reel-seen";
+  let seen = false;
+  try { seen = sessionStorage.getItem(SEEN_KEY) === "1"; } catch {}
+  if (state.city || seen || reduceMotion.matches) return;
+
+  const reelEl = $("reel"), cv = $("reel-cv");
+  const W = 1920, H = 1080, FPS = 30, DUR = 15, HORIZON = 700;
+  cv.width = W; cv.height = H;
+  const ctx = cv.getContext("2d");
+  const buf = Object.assign(document.createElement("canvas"), { width: W, height: H }), bctx = buf.getContext("2d");
+  const acc = Object.assign(document.createElement("canvas"), { width: W, height: H }), actx = acc.getContext("2d");
+  const F_HAND = '"Schoolbell"', INK = "#F4F2EE";
+
+  /* math */
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const P = (t, a, b) => clamp((t - a) / (b - a));
+  const E = {
+    outCubic: (k) => 1 - Math.pow(1 - k, 3),
+    inCubic: (k) => k * k * k,
+    inOutCubic: (k) => (k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2),
+    outExpo: (k) => (k >= 1 ? 1 : 1 - Math.pow(2, -10 * k)),
+    inOutExpo: (k) => (k <= 0 ? 0 : k >= 1 ? 1 : k < .5 ? Math.pow(2, 20 * k - 10) / 2 : (2 - Math.pow(2, -20 * k + 10)) / 2),
+    outBack: (k, s = 1.70158) => 1 + (s + 1) * Math.pow(k - 1, 3) + s * Math.pow(k - 1, 2),
+  };
+  const hash = (a, b = 0) => { const h = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return h - Math.floor(h); };
+
+  /* paths: SVG strings to Path2D, with measured lengths so lines can draw themselves on */
+  const msvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  Object.assign(msvg.style, { position: "absolute", width: 0, height: 0 });
+  const mpath = document.createElementNS("http://www.w3.org/2000/svg", "path"); msvg.appendChild(mpath); document.body.appendChild(msvg);
+  const mk = (d) => { mpath.setAttribute("d", d); return { p: new Path2D(d), len: mpath.getTotalLength() }; };
+
+  const NAMES = ["Boston", "New York", "San Francisco", "Sacramento", "Mexico City"];
+  const SCENE_LEN = 2.54, S = NAMES.map((_, i) => 1.9 + i * SCENE_LEN); // city i is on camera from S[i]
+
+  /* opening: a café sandwich-board sign with "Flâneur" lettered across the middle */
+  const SIGN_WORD = { size: 84, base: 580, cx: 940 }, SIGN_SCALE = .72, SIGN_FOOT = 936;
+  const SIGN = [mk("M560 936 L1360 936"), mk("M740 180 L1140 180 L1190 930 L690 930 Z"), mk("M1140 180 L1292 922")];
+  const SIGN_FACE = new Path2D("M740 180 L1140 180 L1190 930 L690 930 Z");
+  const signX = (x) => 940 + (x - 940) * SIGN_SCALE;
+  let SIGN_LETTERS = [];
+  function layoutWord(text, size, cx) {
+    ctx.font = `${size}px ${F_HAND}`;
+    const m = size * .05, chars = [...text], ws = chars.map((ch) => ctx.measureText(ch).width);
+    let x = cx - (ws.reduce((a, b) => a + b, 0) + m * 2 * ws.length) / 2;
+    return chars.map((ch, i) => { const c = x + m + ws[i] / 2; x += ws[i] + 2 * m; return { ch, cx: c }; });
+  }
+
+  /* camera: a continuous scene index (-1 = the sign); fast whip-pans between cities */
+  const PAN = .38;
+  const cam = (t) => { let c = -1; for (let i = 0; i < 5; i++) c += E.inOutExpo(P(t, S[i] - PAN, S[i])); return c; };
+
+  function drawOpening(g, t) {
+    g.save();
+    g.translate(940, HORIZON); g.scale(SIGN_SCALE, SIGN_SCALE); g.translate(-940, -SIGN_FOOT);
+    g.fillStyle = "#151515"; g.globalAlpha = P(t, .35, .7); g.fill(SIGN_FACE); g.globalAlpha = 1;
+    g.lineCap = "round"; g.lineJoin = "round"; g.strokeStyle = INK; g.lineWidth = 3 / SIGN_SCALE;
+    SIGN.forEach((pt, i) => {
+      const k = E.inOutCubic(P(t, i * .12, i * .12 + .55));
+      if (k <= 0) return;
+      g.setLineDash(k >= 1 ? [] : [pt.len * k, pt.len + 1]); g.stroke(pt.p);
+    });
+    g.setLineDash([]);
+    // the name is lettered on, one letter at a time, each with a small pop
+    g.font = `${SIGN_WORD.size}px ${F_HAND}`; g.textAlign = "center"; g.textBaseline = "alphabetic"; g.lineWidth = 3.2;
+    SIGN_LETTERS.forEach((L, i) => {
+      const ti = .7 + i * .08; if (t < ti) return;
+      const s = lerp(1.35, 1, E.outBack(P(t, ti, ti + .22)));
+      g.save(); g.globalAlpha = P(t, ti, ti + .04); g.translate(L.cx, SIGN_WORD.base); g.scale(s, s); g.strokeText(L.ch, 0, 0); g.restore();
+    });
+    g.restore();
+  }
+
+  function drawCity(g, i, u) {
+    if (u < 0) return;
+    g.save();
+    g.textAlign = "left"; g.textBaseline = "alphabetic";
+    g.font = `200px ${F_HAND}`;
+    const sz = Math.min(200, (1500 / g.measureText(NAMES[i]).width) * 200);
+    g.font = `${sz}px ${F_HAND}`;
+    const NB = 600, chars = [...NAMES[i]], ws = chars.map((ch) => g.measureText(ch).width);
+    g.beginPath(); g.rect(0, NB - sz * 1.05, W, sz * 1.35); g.clip();
+    g.fillStyle = INK;
+    let x = W / 2 - ws.reduce((a, b) => a + b, 0) / 2;
+    chars.forEach((ch, j) => { // each letter rises out of a mask
+      const k = E.outExpo(P(u, .1 + j * .03, .75 + j * .03));
+      g.fillText(ch, x, NB + (1 - k) * sz * 1.1);
+      x += ws[j];
+    });
+    g.restore();
+  }
+
+  function drawScenes(g, t, c) {
+    g.fillStyle = "#000"; g.fillRect(0, 0, W, H);
+    if (c < -.001) { g.save(); g.translate((-1 - c) * W, 0); drawOpening(g, t); g.restore(); }
+    for (let i = 0; i < 5; i++) {
+      const o = i - c; if (Math.abs(o) >= 1) continue;
+      g.save(); g.translate(o * W, 0); drawCity(g, i, t - (S[i] - .3)); g.restore();
+    }
+  }
+
+  /* the sign's pavement line stretches across the frame and becomes the street */
+  function drawStreet(g, t) {
+    if (t < 1.25) return;
+    const k = E.outExpo(P(t, 1.25, 1.65));
+    g.save(); g.strokeStyle = INK; g.lineWidth = 3; g.lineCap = "round";
+    g.beginPath(); g.moveTo(lerp(signX(560), -20, k), HORIZON); g.lineTo(lerp(signX(1360), W + 20, k), HORIZON); g.stroke();
+    g.restore();
+  }
+
+  /* film grain and vignette */
+  const GRAIN = [...Array(6)].map((_, k) => {
+    const c = Object.assign(document.createElement("canvas"), { width: 256, height: 256 }), x = c.getContext("2d");
+    const im = x.createImageData(256, 256); let s = k * 9973 + 7;
+    for (let i = 0; i < im.data.length; i += 4) { s = (s * 16807) % 2147483647; const v = s & 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+    x.putImageData(im, 0, 0); return ctx.createPattern(c, "repeat");
+  });
+  const VIG = ctx.createRadialGradient(W / 2, H / 2, H * .35, W / 2, H / 2, H * 1.05);
+  VIG.addColorStop(0, "rgba(0,0,0,0)"); VIG.addColorStop(1, "rgba(0,0,0,.55)");
+
+  function render(t) {
+    t = clamp(t, 0, DUR - 1e-6);
+    const c = cam(t), f = Math.floor(t * FPS);
+    if (Math.abs(cam(t + .5 / FPS) - cam(t - .5 / FPS)) > .004) { // motion blur during the whip-pans
+      const N = 12, shutter = 1.1 / FPS;
+      actx.globalCompositeOperation = "source-over"; actx.globalAlpha = 1; actx.fillStyle = "#000"; actx.fillRect(0, 0, W, H);
+      actx.globalCompositeOperation = "lighter"; actx.globalAlpha = 1 / N;
+      for (let j = 0; j < N; j++) { drawScenes(bctx, t, cam(t + (j / (N - 1) - .5) * shutter)); actx.drawImage(buf, 0, 0); }
+      actx.globalCompositeOperation = "source-over"; actx.globalAlpha = 1;
+      ctx.drawImage(acc, 0, 0);
+    } else drawScenes(ctx, t, c);
+    drawStreet(ctx, t);
+    ctx.save();
+    ctx.globalAlpha = .06; ctx.fillStyle = GRAIN[f % 6];
+    ctx.translate(hash(f) * 256, hash(f, 1) * 256); ctx.fillRect(-256, -256, W + 512, H + 512);
+    ctx.restore();
+    ctx.fillStyle = VIG; ctx.fillRect(0, 0, W, H);
+    const fade = P(t, 14.62, 15);
+    if (fade > 0) { ctx.fillStyle = `rgba(0,0,0,${E.inCubic(fade)})`; ctx.fillRect(0, 0, W, H); }
+  }
+
+  /* playback: run once, then fade to the home page */
+  let t0 = 0, done = false, raf = 0;
+  function finish() {
+    if (done) return; done = true;
+    cancelAnimationFrame(raf);
+    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch {}
+    reelEl.classList.add("out");
+    document.body.classList.remove("reel-on");
+    if (!state.city) { $("home-view").hidden = true; requestAnimationFrame(() => { $("home-view").hidden = false; }); } // replay the home fade-in
+    setTimeout(() => { reelEl.remove(); msvg.remove(); }, 850);
+  }
+  function tick(ms) {
+    const t = (ms - t0) / 1000;
+    if (t >= DUR) return finish();
+    render(t);
+    raf = requestAnimationFrame(tick);
+  }
+  reelEl.hidden = false;
+  document.body.classList.add("reel-on");
+  ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
+  $("reel-skip").addEventListener("click", finish);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") finish(); });
+  window.addEventListener("hashchange", finish); // a city link or the back button ends the reel
+  const fontReady = document.fonts ? Promise.race([document.fonts.load(`84px ${F_HAND}`, "Flâneur"), new Promise((r) => setTimeout(r, 1500))]) : Promise.resolve();
+  fontReady.catch(() => {}).then(() => {
+    SIGN_LETTERS = layoutWord("Flâneur", SIGN_WORD.size, SIGN_WORD.cx);
+    t0 = performance.now();
+    raf = requestAnimationFrame(tick);
+  });
+})();
 </script>
 </body>
 </html>
-```
