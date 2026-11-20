@@ -9,35 +9,30 @@
 <meta name="description" content="Independent specialty coffee shops in Boston, Sacramento, New York, San Francisco and Mexico City.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Instrument+Serif:ital@0;1&family=Schoolbell&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Schoolbell&display=swap">
 <style>
-/* Type: PP Neue Montreal (sans) and PP Editorial New (serif) from Pangram Pangram.
-   Drop the .woff2 files into a "fonts" folder next to this page and they take over.
-   Until then the closest free look-alikes load: Inter Tight and Instrument Serif. */
-@font-face { font-family: "PP Neue Montreal"; src: url("fonts/PPNeueMontreal-Book.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "PP Neue Montreal"; src: url("fonts/PPNeueMontreal-Medium.woff2") format("woff2"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "PP Editorial New"; src: url("fonts/PPEditorialNew-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "PP Editorial New"; src: url("fonts/PPEditorialNew-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-
+/* Type: Schibsted Grotesk for the interface, Newsreader (display optical size) for café names,
+   Schoolbell for the chalkboard lettering. All free from Google Fonts.
+   Color: warm neutrals tinted toward coffee, never pure black or white. */
 :root {
-  --bg: #FFFFFF;
-  --surface: #F6F6F4;
-  --ink: #0A0A0A;
-  --muted: #6B6B6B;
-  --line: #E3E3E3;
+  --bg: #F7F3EC;      /* oat paper */
+  --surface: #EEE6D9; /* board face */
+  --ink: #221A14;     /* espresso */
+  --muted: #6E6157;
+  --line: #E0D6C6;
   --font-hand: "Schoolbell", "Bradley Hand", "Comic Sans MS", cursive;
-  --font-sans: "PP Neue Montreal", "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --font-serif: "PP Editorial New", "Instrument Serif", Georgia, serif;
+  --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
+    --bg: #16110D; --surface: #211A15; --ink: #F2EADF; --muted: #A99B8D; --line: #382E27;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #000000; --surface: #111111; --ink: #FFFFFF; --muted: #A3A3A3; --line: #2B2B2B;
+  --bg: #16110D; --surface: #211A15; --ink: #F2EADF; --muted: #A99B8D; --line: #382E27;
   color-scheme: dark;
 }
 
@@ -72,7 +67,7 @@ body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 .tabs { display: flex; gap: 2px; width: max-content; margin-left: auto; }
 .tab { border-radius: 999px; padding: 5px 12px; font-size: 15px; white-space: nowrap; text-decoration: none; color: var(--muted); transition: color .15s; }
 .tab:hover { color: var(--ink); }
-.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.tab[aria-current="page"] { background: var(--ink); color: var(--bg); }
 .nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
 
 /* Views fade in when you switch between home and a city */
@@ -82,8 +77,8 @@ main:not([hidden]) { animation: view-in .5s ease both; }
 /* Home: evenly spaced cities on top, the sandwich board centered on the screen */
 .intro { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
 .intro-nav { position: relative; z-index: 1; display: flex; justify-content: space-around; gap: 12px; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-left, 0px)) 0; font-family: var(--font-hand); font-size: 20px; }
-.intro-nav a { text-decoration: none; white-space: nowrap; transition: opacity .2s; }
-.intro-nav:hover a:not(:hover) { opacity: .35; }
+.intro-nav a { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1.5px; text-underline-offset: 5px; white-space: nowrap; transition: text-decoration-color .2s; }
+.intro-nav a:hover, .intro-nav a:focus-visible { text-decoration-color: currentColor; }
 .intro-nav .short { display: none; }
 .intro-stage { position: absolute; inset: 0; display: grid; place-items: center; }
 
@@ -105,27 +100,40 @@ main:not([hidden]) { animation: view-in .5s ease both; }
 @media (prefers-reduced-motion: no-preference) {
   .intro:not(.drawn) .board .line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .55s ease-in-out var(--d, 0s) forwards; }
   .intro:not(.drawn) .board .face { opacity: 0; animation: show .35s ease .35s forwards; }
-  .intro:not(.drawn) .mark span { opacity: 0; scale: 1.35; animation: letter .22s cubic-bezier(.34, 1.56, .64, 1) calc(.7s + var(--i) * .08s) forwards; }
+  .intro:not(.drawn) .mark span { opacity: 0; translate: 0 .12em; animation: letter .32s cubic-bezier(.25, 1, .5, 1) calc(.7s + var(--i) * .08s) forwards; }
   .intro:not(.drawn) .street { opacity: 0; clip-path: inset(0 calc(50% - var(--bh) * 400 / 766)); animation: show 0s 1.2s forwards, stretch .45s cubic-bezier(.16, 1, .3, 1) 1.25s forwards; }
   @keyframes draw { to { stroke-dashoffset: 0; } }
   @keyframes show { to { opacity: 1; } }
-  @keyframes letter { to { opacity: 1; scale: 1; } }
+  @keyframes letter { to { opacity: 1; translate: 0 0; } }
   @keyframes stretch { to { clip-path: inset(0 0); } }
 }
 
-/* City page: just the cafés, centered */
+/* City page: the cafés, centered, each with a short description and a tip.
+   Only the name is the link (so screen readers hear a short label), but the
+   whole row is clickable through a stretched ::after. */
 .shops { list-style: none; margin: 0 auto; padding: 56px 0 72px; max-width: 900px; }
-.shop { border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
+.shop { position: relative; text-align: center; padding: 30px 0 32px; border-top: 1px solid var(--line); opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: var(--d, 0ms); }
 .shop:last-child { border-bottom: 1px solid var(--line); }
 .shop.in { opacity: 1; transform: none; }
-.shop a { display: block; text-align: center; padding: 26px 0 24px; text-decoration: none; transition: opacity .25s; }
-.shops:hover .shop a:not(:hover) { opacity: .35; }
-.shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(34px, 5.2vw, 68px); line-height: 1; letter-spacing: -.01em; }
-.shop .meta { display: block; margin-top: 8px; font-size: 15px; color: var(--muted); }
-.shop a:hover .nm, .shop a:focus-visible .nm { font-style: italic; }
+.shop a { text-decoration: none; }
+.shop a::after { content: ""; position: absolute; inset: 0; }
+.shop h2 { font-weight: 400; }
+.shop .nm { display: block; font-family: var(--font-serif); font-optical-sizing: auto; font-size: clamp(34px, 5.2vw, 68px); line-height: 1; letter-spacing: -.015em; }
+.shop .meta { margin: 10px 0 0; font-size: 15px; color: var(--muted); }
+.shop .ext { display: inline-block; margin-left: .3em; font-size: .9em; }
+.shop .blurb { max-width: 46ch; margin: 18px auto 0; line-height: 1.5; text-wrap: pretty; }
+.shop .note { max-width: 40ch; margin: 10px auto 0; font-family: var(--font-serif); font-style: italic; font-size: 21px; line-height: 1.3; color: var(--muted); text-wrap: balance; }
+/* Only the hovered or focused café changes; the others stay at full strength */
+.shop:hover .nm, .shop a:focus-visible .nm { font-style: italic; }
+.shop a:focus-visible { outline: none; }
+.shop:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 3px; }
 
 footer { padding-block: 40px 48px; color: var(--muted); }
 footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.foot-cities { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
+.foot-cities li + li::before { content: "·"; content: "·" / ""; padding-inline: .5em; }
+.foot-cities a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color .15s, text-decoration-color .15s; }
+.foot-cities a:hover, .foot-cities a:focus-visible, .foot-cities a[aria-current="page"] { color: var(--ink); text-decoration-color: currentColor; }
 
 @media (max-width: 760px) {
   .top .wrap { flex-wrap: wrap; gap: 6px 12px; }
@@ -137,7 +145,9 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
   .intro-nav .short { display: inline; }
   .intro-nav { font-size: 18px; }
   .shops { padding-top: 32px; }
-  .shop a { padding-block: 20px 18px; }
+  .shop { padding-block: 24px 26px; }
+  .shop .blurb { margin-top: 14px; font-size: 16px; }
+  .shop .note { font-size: 19px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
@@ -153,7 +163,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
     <a class="brand" href="#home">Flâneur</a>
     <div class="tabs-box">
       <button type="button" class="nudge" id="nudge-left" aria-label="Scroll cities left" hidden>←</button>
-      <nav class="tabs-scroll" id="tabs-scroll" aria-label="Choose a city">
+      <nav class="tabs-scroll" id="tabs-scroll" aria-label="Cities">
         <div class="tabs" id="tabs"></div>
       </nav>
       <button type="button" class="nudge" id="nudge-right" aria-label="Scroll cities right" hidden>→</button>
@@ -163,7 +173,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 
 <main id="home-view" hidden>
   <section class="intro" id="intro">
-    <nav class="intro-nav" id="intro-nav" aria-label="Cities, quick links"></nav>
+    <nav class="intro-nav" id="intro-nav" aria-label="Cities"></nav>
     <div class="street" aria-hidden="true"></div>
     <div class="intro-stage">
       <div class="board">
@@ -181,7 +191,7 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 
 <main id="city-view" hidden>
   <!-- City name kept for screen readers only; the selected tab shows it visually -->
-  <h1 class="sr-only" id="city-title"></h1>
+  <h1 class="sr-only" id="city-title" tabindex="-1"></h1>
   <section class="wrap" aria-label="Cafés">
     <ul class="shops" id="shops"></ul>
   </section>
@@ -189,13 +199,13 @@ footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 
 
 <footer>
   <div class="wrap">
-    <p class="label" style="margin:0">Boston · Sacramento · NYC · SF · CDMX</p>
+    <nav aria-label="All cities"><ul class="label foot-cities" id="foot-cities"></ul></nav>
   </div>
 </footer>
 
 <script>
 // Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
-// blurb, note and the a{} scores are kept in the data but not shown.
+// City pages show name, hood, know, blurb and note. The a{} scores are kept in the data but not shown.
 const CITIES = [
   { id: "boston", name: "Boston", region: "Massachusetts", tz: "America/New_York",
     shops: [
@@ -285,8 +295,8 @@ function renderTabs() {
   const items = [{ id: "home", label: "Home", sel: !state.city }]
     .concat(CITIES.map((c) => ({ id: c.id, label: shortName(c), sel: state.city && state.city.id === c.id })));
   $("tabs").innerHTML = items.map((t) =>
-    `<a class="tab" role="tab" id="tab-${t.id}" href="#${t.id}" aria-selected="${!!t.sel}">${t.label}</a>`).join("");
-  const active = document.querySelector('.tab[aria-selected="true"]');
+    `<a class="tab" id="tab-${t.id}" href="#${t.id}"${t.sel ? ' aria-current="page"' : ""}>${esc(t.label)}</a>`).join("");
+  const active = document.querySelector('.tab[aria-current="page"]');
   if (active) {
     const sc = $("tabs-scroll");
     const l = active.offsetLeft - sc.offsetLeft, r = l + active.offsetWidth;
@@ -337,10 +347,10 @@ function renderCity() {
   $("city-title").textContent = c.name;
   $("shops").innerHTML = c.shops.map((s, i) => `
     <li class="shop" style="--d:${Math.min(i, 6) * 90}ms">
-      <a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">
-        <span class="nm">${esc(s.name)}</span>
-        <span class="meta">${esc(s.hood)} · ${esc(s.know)}</span>
-      </a>
+      <h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener"><span class="nm">${esc(s.name)}</span><span class="sr-only"> (opens Google Maps in a new tab)</span></a></h2>
+      <p class="meta">${esc(s.hood)} · ${esc(s.know)}<span class="ext" aria-hidden="true">↗</span></p>
+      ${s.blurb ? `<p class="blurb">${esc(s.blurb)}</p>` : ""}
+      ${s.note ? `<p class="note">${esc(s.note)}</p>` : ""}
     </li>`).join("");
   document.querySelectorAll(".shop").forEach((el) => {
     if (!reveal || reduceMotion.matches) el.classList.add("in"); else reveal.observe(el);
@@ -352,11 +362,23 @@ function renderAll() {
   $("home-view").hidden = !home;
   $("city-view").hidden = home;
   document.body.dataset.view = home ? "home" : "city";
+  document.title = home ? "Flâneur" : `${state.city.name} · Flâneur`;
   renderTabs();
+  renderFooter();
   if (!home) renderCity();
 }
 
-window.addEventListener("hashchange", () => { pickView(); renderAll(); window.scrollTo(0, 0); });
+/* Footer: every city as a real link, the current one marked */
+function renderFooter() {
+  $("foot-cities").innerHTML = CITIES.map((c) =>
+    `<li><a href="#${c.id}"${state.city === c ? ' aria-current="page"' : ""}>${esc(shortName(c))}</a></li>`).join("");
+}
+
+window.addEventListener("hashchange", () => {
+  pickView(); renderAll(); window.scrollTo(0, 0);
+  // no page load happened, so move focus to the new city's heading for keyboard and screen reader users
+  if (state.city) $("city-title").focus({ preventScroll: true });
+});
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateNudges);
 
 pickView();
