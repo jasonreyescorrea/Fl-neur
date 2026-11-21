@@ -6,47 +6,46 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Flâneur</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="A short list of independent coffee shops worth walking to, in Boston, Sacramento, New York, San Francisco and Mexico City.">
-<meta name="theme-color" content="#EEE7DB">
+<meta name="description" content="Independent coffee shops worth walking to, in Boston, Sacramento, New York, San Francisco and Mexico City.">
+<meta name="theme-color" content="#F1F0EC">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Delicious+Handrawn&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Delicious+Handrawn&display=swap">
 <style>
-/* Flâneur is a corner café: a pale limestone front, a cream-tiled base, an oxblood awning with the
-   name painted on by hand, and an oxblood-framed window with the room glowing orange behind it.
-   One warm light, three materials (stone, tile, painted steel), very few words.
-   Type: Newsreader (names), Schibsted Grotesk (interface), Delicious Handrawn (the painted sign only).
-   All free from Google Fonts. Neutrals are tinted warm; nothing is pure black or white. */
+/* Flâneur as a flat-lay: the cafés I keep going back to, laid out on a linen sheet like the things in
+   my bag. Each city is a matchbook. Notes are written on by hand, with arrows.
+   Palette from the things on my board: navy, cream, burgundy and sky blue on soft off-white.
+   Type: Newsreader (names), Schibsted Grotesk (labels and reading), Delicious Handrawn (the notes).
+   All free from Google Fonts. Nothing is pure black or pure white. */
 :root {
-  --stone: #EEE7DB;      /* limestone */
-  --stone-2: #E5DCCD;
-  --tile: #F3EDE3;
-  --grout: #D6CBB9;
-  --ink: #2A1F1A;
-  --muted: #6B5E54;
-  --line: #DCD1C0;
-  --oxblood: #6E1F22;
-  --oxblood-2: #571719;
-  --green: #2F4A3A;
-  --wood: #7A4E33;
-  --cream: #F6EEE2;
-  --glow: #F08A4B;       /* the lit room */
-  --glow-hi: #FBC48A;
-  --glow-lo: #D0602F;
-  --glow-ink: #2A1612;
+  --sheet: #F1F0EC;
+  --sheet-2: #E7E6E1;
+  --navy: #1E2747;
+  --muted: #5D6274;
+  --line: #D9D8D2;
+  --cream: #F3EAD6;
+  --burgundy: #7B1E2C;
+  --sky: #B9CCE4;
+  --strike: #6B5A4B;
   --ease: cubic-bezier(.25, 1, .5, 1);
   --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Newsreader", Georgia, serif;
   --font-hand: "Delicious Handrawn", "Bradley Hand", cursive;
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3  0 0 0 0 .22  0 0 0 0 .16  0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-  --stain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .008' numOctaves='5' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .3  1.2 0 0 0 -.5'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)' opacity='.12'/%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2  0 0 0 0 .22  0 0 0 0 .3  0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
   color-scheme: light;
 }
 
 * { box-sizing: border-box; }
-html, body { background: var(--stone); }
-body { color: var(--ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--stone); }
+html, body { background: var(--sheet); }
+/* the sheet: off-white linen with a few soft folds */
+body { color: var(--navy); font-family: var(--font-sans); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  background-color: var(--sheet);
+  background-image: var(--grain),
+    linear-gradient(104deg, transparent 18%, rgba(70, 76, 96, .05) 24%, transparent 31%),
+    linear-gradient(76deg, transparent 52%, rgba(255, 255, 255, .5) 57%, rgba(70, 76, 96, .05) 61%, transparent 68%),
+    linear-gradient(170deg, transparent 70%, rgba(70, 76, 96, .045) 80%, transparent 90%);
+  background-size: 160px, 100% 100vh, 100% 100vh, 100% 100vh; background-attachment: scroll, fixed, fixed, fixed; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--sheet); }
 .wrap {
   max-width: 1180px; margin: 0 auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
@@ -56,19 +55,14 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 p { margin: 0; }
 button, a { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-/* Limestone: soft weathering under a fine grain */
-.limestone { background-color: var(--stone); background-image: var(--grain), var(--stain); background-size: 160px, cover; }
-/* Square cream tiles with grout lines */
-.tiles { background-color: var(--tile);
-  background-image: var(--grain), linear-gradient(var(--grout) 2px, transparent 2px), linear-gradient(90deg, var(--grout) 2px, transparent 2px), linear-gradient(135deg, rgba(255, 255, 255, .5), transparent 45%);
-  background-size: 160px, var(--t, 44px) var(--t, 44px), var(--t, 44px) var(--t, 44px), var(--t, 44px) var(--t, 44px); }
+.hand { font-family: var(--font-hand); font-weight: 400; }
 
 /* Sticky header on city pages */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--stone); border-bottom: 1px solid var(--line); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--sheet) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
-.brand { font-family: var(--font-hand); font-size: 32px; line-height: 1; color: var(--oxblood); white-space: nowrap; text-decoration: none; }
+.brand { font-family: var(--font-serif); font-style: italic; font-size: 26px; line-height: 1; white-space: nowrap; text-decoration: none; }
 body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 
 .tabs-box { flex: 1; min-width: 0; display: flex; align-items: center; gap: 2px; }
@@ -78,131 +72,120 @@ body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 .tabs-scroll::-webkit-scrollbar { display: none; }
 .tabs { display: flex; gap: 2px; width: max-content; margin-left: auto; }
 .tab { border-radius: 999px; padding: 5px 12px; font-size: 15px; white-space: nowrap; text-decoration: none; color: var(--muted); transition: color .15s; }
-.tab:hover { color: var(--ink); }
-.tab[aria-current="page"] { background: var(--oxblood); color: var(--cream); }
-.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--stone); color: var(--ink); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
+.tab:hover { color: var(--navy); }
+.tab[aria-current="page"] { background: var(--navy); color: var(--cream); }
+.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--sheet); color: var(--navy); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
 
 main:not([hidden]) { animation: view-in .6s var(--ease) both; }
 @keyframes view-in { from { opacity: 0; } }
 
-/* ---------- Home: the café front ---------- */
-.front { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
-.facade { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding: calc(40px + env(safe-area-inset-top, 0px)) 20px 0; }
-.shopfront { position: relative; width: min(940px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) clamp(120px, 15vw, 170px); grid-template-rows: auto 1fr; column-gap: 0; }
+/* ---------- The matchbook ---------- */
+.mb { --w: 150px; position: relative; display: block; width: var(--w); aspect-ratio: 15 / 23; text-decoration: none; color: var(--fg);
+  background: var(--bg); border-radius: 3px; overflow: hidden;
+  box-shadow: 0 1px 1px rgba(30, 39, 71, .12), 0 3px 6px rgba(30, 39, 71, .08), 0 16px 28px -10px rgba(30, 39, 71, .32); }
+.mb::before { /* paper grain and a little light across the card */
+  content: ""; position: absolute; inset: 0; background-image: var(--grain), linear-gradient(140deg, rgba(255, 255, 255, .18), transparent 40%, rgba(0, 0, 0, .05)); background-size: 160px, auto; pointer-events: none; z-index: 2; }
+.mb-face { position: absolute; inset: 0 0 21% 0; display: flex; flex-direction: column; justify-content: space-between; padding: 14px 13px 12px; }
+.mb-city { font-family: var(--font-serif); font-size: calc(var(--w) * .17); line-height: .98; letter-spacing: -.01em; }
+.mb-small { font-size: calc(var(--w) * .066); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+/* the fold and striker at the bottom */
+.mb-flap { position: absolute; left: 0; right: 0; bottom: 0; height: 21%; background: var(--bg); border-top: 1px solid rgba(0, 0, 0, .18); box-shadow: inset 0 6px 8px -6px rgba(0, 0, 0, .35); }
+.mb-flap::after { content: ""; position: absolute; left: 10%; right: 10%; top: 34%; height: 26%; border-radius: 1px; background: var(--strike); background-image: var(--grain); background-size: 80px; }
+/* each city's cover, in the colours from the board */
+.mb[data-c="boston"] { --bg: var(--navy); --fg: var(--cream); }
+.mb[data-c="boston"] .mb-face { background: linear-gradient(90deg, transparent 64%, var(--cream) 64% 67%, transparent 67% 72%, var(--cream) 72% 75%, transparent 75% 80%, var(--cream) 80% 83%, transparent 83%); }
+.mb[data-c="sacramento"] { --bg: var(--burgundy); --fg: var(--cream); }
+.mb[data-c="sacramento"] .mb-face { box-shadow: inset 0 0 0 7px var(--burgundy), inset 0 0 0 8.5px var(--cream); }
+.mb[data-c="nyc"] { --bg: var(--cream); --fg: var(--navy); }
+.mb[data-c="nyc"] .mb-face::after { content: ""; position: absolute; left: 0; right: 0; top: 46%; height: 13%; background: var(--burgundy); }
+.mb[data-c="nyc"] .mb-face { justify-content: flex-start; gap: 6px; }
+.mb[data-c="sf"] { --bg: var(--sky); --fg: var(--navy); }
+.mb[data-c="sf"] .mb-face::after { content: ""; position: absolute; right: 13px; top: 32px; width: 28%; aspect-ratio: 1; border-radius: 50%; border: 1.5px solid var(--navy); }
+.mb[data-c="cdmx"] { --bg: #ECECEA; --fg: var(--navy); }
+.mb[data-c="cdmx"] .mb-face { background: linear-gradient(118deg, transparent 58%, var(--navy) 58% 66%, transparent 66% 71%, var(--burgundy) 71% 79%, transparent 79%) 0 22% / 100% 36% no-repeat; }
 
-/* the awning: oxblood canvas, the name painted on the valance */
-.awning { grid-column: 1 / -1; position: relative; z-index: 2; margin-inline: -28px; filter: drop-shadow(0 14px 14px rgba(60, 20, 10, .22)); }
-.canopy { height: clamp(40px, 6vh, 64px); background: var(--oxblood-2);
-  background-image: var(--grain), repeating-linear-gradient(90deg, rgba(0, 0, 0, .14) 0 2px, transparent 2px 46px), linear-gradient(180deg, rgba(0, 0, 0, .25), rgba(255, 255, 255, .05));
-  background-size: 160px, auto, auto; clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%); }
-.valance { display: flex; align-items: center; justify-content: center; height: clamp(76px, 11vh, 108px); background: var(--oxblood); background-image: var(--grain); background-size: 160px; }
-.mark { font-family: var(--font-hand); font-weight: 400; font-size: clamp(56px, 8.4vh, 88px); line-height: 1; color: var(--cream); letter-spacing: .01em; translate: 0 .04em; }
-
-/* the window: oxblood steel, small upper panes, the room glowing behind the glass */
-.window { grid-column: 1; grid-row: 2; position: relative; display: grid; grid-template-rows: auto 1fr; gap: 10px; padding: 10px; background: var(--oxblood); min-height: min(58vh, 560px); }
-.transom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; height: clamp(54px, 9vh, 84px); }
-.pane { position: relative; overflow: hidden; background:
-  radial-gradient(ellipse 70% 120% at 50% 0%, var(--glow-hi), transparent 70%),
-  linear-gradient(180deg, var(--glow), var(--glow-lo)); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18), inset 0 0 40px rgba(110, 30, 10, .35); }
-/* glass: a faint diagonal sheen from the street */
-.pane::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255, 255, 255, .16), transparent 30%, transparent 62%, rgba(255, 255, 255, .08) 70%, transparent 78%); pointer-events: none; }
-/* amber globe pendants hanging in the room */
-.transom .pane:nth-child(2)::before, .transom .pane:nth-child(3)::before { content: ""; position: absolute; left: 50%; bottom: 10px; width: 18px; height: 18px; translate: -50% 0; border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #FFF1D2, #FFC27A 55%, #E58A3A); box-shadow: 0 0 18px 8px rgba(255, 196, 120, .55); }
-.main-pane { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 4vw, 48px); color: var(--glow-ink);
-  background: radial-gradient(ellipse 60% 50% at 30% 10%, var(--glow-hi), transparent 70%), radial-gradient(ellipse 120% 90% at 50% 40%, var(--glow), var(--glow-lo) 90%); }
-.menu ul { list-style: none; margin: 0; padding: 0; }
-.menu li + li { border-top: 1px solid rgba(42, 22, 18, .2); }
-.menu a { display: flex; align-items: baseline; gap: 12px; padding: 10px 0 9px; text-decoration: none; }
-.menu .city { font-family: var(--font-serif); font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; letter-spacing: -.01em; }
-.menu .n { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; opacity: .75; }
-.menu a:hover .city, .menu a:focus-visible .city { font-style: italic; }
-.menu a:focus-visible { outline-color: var(--glow-ink); outline-offset: 2px; }
-
-/* the door: wood and glass, a brass number */
-.door { grid-column: 2; grid-row: 2; position: relative; margin-left: 10px; background: var(--wood); padding: 12px 12px 0;
-  background-image: var(--grain), linear-gradient(90deg, rgba(0, 0, 0, .12), transparent 30%, rgba(255, 255, 255, .06) 60%, rgba(0, 0, 0, .1)); background-size: 160px, auto;
-  box-shadow: inset 0 0 0 3px var(--oxblood); display: grid; grid-template-rows: 1fr 30%; gap: 12px; }
-.door .pane { border-radius: 2px; }
-.door .panel { background: rgba(0, 0, 0, .08); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .12); margin-bottom: 12px; }
-.door .handle { position: absolute; left: 8px; top: 56%; width: 5px; height: 34px; border-radius: 3px; background: linear-gradient(90deg, #B98A4B, #E9C27E, #A97A3B); }
-
-/* the base: cream tiles, the step, the light falling out onto the pavement */
-.base { --t: clamp(28px, 3.4vh, 40px); height: clamp(90px, 15vh, 150px); border-top: 10px solid var(--oxblood); position: relative; }
-.base::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse min(40vw, 480px) 70% at 50% 0%, rgba(240, 138, 75, .22), transparent 70%); pointer-events: none; }
-.pavement { height: clamp(28px, 5vh, 52px); background: var(--stone-2); background-image: var(--grain); background-size: 160px; border-top: 1px solid var(--grout); }
+/* ---------- Home: the flat-lay ---------- */
+.lay { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; padding-top: calc(28px + env(safe-area-inset-top, 0px)); padding-bottom: 56px; }
+.lay > nav { flex: 1; display: flex; }
+.lay-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+.mark { font-family: var(--font-serif); font-style: italic; font-size: clamp(44px, 6vw, 76px); line-height: 1; letter-spacing: -.02em; }
+.lay-note { font-size: clamp(22px, 2.2vw, 28px); color: var(--muted); transform: rotate(-2deg); }
+.spread { flex: 1; list-style: none; margin: 0; padding: 40px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; align-content: center; gap: clamp(28px, 4vw, 64px) clamp(24px, 3.4vw, 56px); }
+.item { position: relative; transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)); }
+.item .mb { --w: clamp(132px, 13.5vw, 178px); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.item .mb:hover, .item .mb:focus-visible { transform: translateY(-6px) rotate(calc(var(--r, 0deg) * -.6)); box-shadow: 0 1px 1px rgba(30, 39, 71, .12), 0 6px 10px rgba(30, 39, 71, .08), 0 26px 36px -12px rgba(30, 39, 71, .34); }
+.item:nth-child(1) { --r: -4deg; --y: 18px; }
+.item:nth-child(2) { --r: 3deg; --y: -26px; }
+.item:nth-child(3) { --r: -1.5deg; --y: 30px; }
+.item:nth-child(4) { --r: 5deg; --y: -14px; }
+.item:nth-child(5) { --r: -3deg; --y: 22px; }
+/* handwritten label with an arrow, above or below each matchbook */
+.label { position: absolute; left: 50%; display: flex; align-items: center; gap: 4px; white-space: nowrap; font-size: 22px; line-height: 1; color: var(--navy); pointer-events: none; transform: translateX(-50%) rotate(calc(var(--r, 0deg) * -1)); }
+.label svg { width: 34px; height: 30px; flex: none; overflow: visible; }
+.label path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.item:nth-child(odd) .label { bottom: calc(100% + 8px); flex-direction: row; }
+.item:nth-child(even) .label { top: calc(100% + 8px); flex-direction: row-reverse; }
+.item:nth-child(even) .label svg { transform: scaleY(-1); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .front:not(.lit) .pane { animation: lights-up 1.4s var(--ease) .1s both; }
-  .front:not(.lit) .mark { animation: rise 1s var(--ease) .5s both; }
-  @keyframes lights-up { from { filter: brightness(.35) saturate(.5); } }
-  @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+  .lay:not(.laid) .item { animation: drop .8s var(--ease) both; animation-delay: calc(.15s + var(--i) * .08s); }
+  .lay:not(.laid) .label { animation: ink .6s ease both; animation-delay: calc(.8s + var(--i) * .08s); }
+  @keyframes drop { from { opacity: 0; transform: translate(var(--x, 0), calc(var(--y, 0px) - 16px)) rotate(calc(var(--r, 0deg) + 6deg)); } }
+  @keyframes ink { from { opacity: 0; } }
 }
 
 /* ---------- City page ---------- */
-.room-head { border-bottom: 1px solid var(--line); }
-.room-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px; min-height: clamp(220px, 34vh, 340px); padding-block: 48px 44px; }
-.room-region { font-size: 15px; color: var(--muted); }
-.room-title { margin-top: 10px; font-family: var(--font-serif); font-weight: 300; font-size: clamp(52px, 8vw, 112px); line-height: .95; letter-spacing: -.03em; }
+.city-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 40px; padding-block: 56px 40px; }
+.city-head .hand { font-size: 24px; color: var(--muted); transform: rotate(-1.5deg); transform-origin: left; display: inline-block; }
+.room-title { margin-top: 6px; font-family: var(--font-serif); font-size: clamp(52px, 8vw, 112px); line-height: .95; letter-spacing: -.03em; }
 .room-title:focus { outline: none; }
-.room-title:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 6px; }
-/* the same lit window, small, beside the name */
-.peek { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; width: clamp(110px, 12vw, 150px); height: clamp(140px, 22vh, 200px); margin-bottom: -44px; background: var(--oxblood); }
-.peek .pane:first-child, .peek .pane:nth-child(2) { height: 34px; }
-.peek .pane:nth-child(3) { grid-column: 1 / -1; }
-.peek { grid-template-rows: 34px 1fr; }
-.room-tiles { --t: 22px; height: 44px; border-top: 6px solid var(--oxblood); }
+.room-title:focus-visible { outline: 2px solid var(--navy); outline-offset: 6px; }
+.city-head .mb { --w: clamp(120px, 12vw, 160px); transform: rotate(4deg); margin-right: 12px; }
 
-/* The menu: each café on its own line. Only the name is the link (a short label for screen readers),
-   but the whole row is clickable through a stretched ::after. */
-.shops { list-style: none; margin: 0 auto; padding: 16px 0 96px; counter-reset: shop; }
+/* each café is a labelled item: name, where, why, and my note in pen */
+.shops { list-style: none; margin: 0; padding: 0 0 96px; border-top: 1px solid var(--line); counter-reset: shop; }
 .shop { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 10px 64px; align-items: start; padding: 40px 0 42px; border-bottom: 1px solid var(--line); counter-increment: shop;
   opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0ms); }
 .shop.in { opacity: 1; transform: none; }
 .shop a { text-decoration: none; }
 .shop a::after { content: ""; position: absolute; inset: 0; }
 .shop-head { display: grid; grid-template-columns: 2.8em 1fr; column-gap: 4px; }
-.shop-head::before { content: counter(shop, decimal-leading-zero); grid-row: span 2; padding-top: .7em; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted); transition: color .2s; }
+.shop-head::before { content: counter(shop, decimal-leading-zero); grid-row: span 2; padding-top: .7em; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted); }
 .shop h2 { font-weight: 400; }
 .shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; letter-spacing: -.02em; }
 .shop .meta { margin-top: 10px; font-size: 15px; color: var(--muted); }
 .shop .ext { display: inline-block; margin-left: .35em; transition: transform .25s var(--ease); }
 .shop-body { padding-top: .6em; }
 .shop .blurb { max-width: 48ch; line-height: 1.6; text-wrap: pretty; }
-.shop .note { max-width: 44ch; margin-top: 14px; font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.35; color: var(--oxblood); text-wrap: balance; }
+.shop .note { display: flex; gap: 8px; align-items: baseline; max-width: 44ch; margin-top: 14px; font-family: var(--font-hand); font-size: 25px; line-height: 1.1; color: var(--burgundy); }
+.shop .note::before { content: "→"; content: "→" / ""; font-family: var(--font-sans); font-size: 18px; }
 .shop:hover .nm, .shop a:focus-visible .nm { font-style: italic; }
-.shop:hover .shop-head::before, .shop:has(a:focus-visible) .shop-head::before { color: var(--oxblood); }
 .shop:hover .ext { transform: translate(2px, -2px); }
 .shop a:focus-visible { outline: none; }
-.shop:has(a:focus-visible) { outline: 2px solid var(--oxblood); outline-offset: 6px; }
+.shop:has(a:focus-visible) { outline: 2px solid var(--navy); outline-offset: 6px; }
 
 footer { color: var(--muted); }
-footer .wrap { display: flex; justify-content: center; padding-block: 8px 32px; font-size: 14px; }
+footer .wrap { display: flex; justify-content: center; padding-block: 8px 48px; font-size: 14px; }
 .foot-cities { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
 .foot-cities li + li::before { content: "·"; content: "·" / ""; padding-inline: .5em; }
 .foot-cities a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color .15s, text-decoration-color .15s; }
-.foot-cities a:hover, .foot-cities a:focus-visible, .foot-cities a[aria-current="page"] { color: var(--ink); text-decoration-color: currentColor; }
-.foot-tiles { --t: 28px; height: 84px; border-top: 6px solid var(--oxblood); }
+.foot-cities a:hover, .foot-cities a:focus-visible, .foot-cities a[aria-current="page"] { color: var(--navy); text-decoration-color: currentColor; }
 
 @media (max-width: 820px) {
   .top .wrap { flex-wrap: wrap; gap: 6px 12px; }
   .brand { flex: 1; }
   .tabs-box { order: 3; flex-basis: 100%; }
   .tabs { margin-left: 0; }
-  .shopfront { grid-template-columns: 1fr; }
-  .awning { margin-inline: -12px; }
-  .door { display: none; }
-  .window { min-height: 0; }
-  .transom { grid-template-columns: repeat(3, 1fr); }
-  .transom .pane:nth-child(4) { display: none; }
-  .room-in { grid-template-columns: 1fr; min-height: 200px; padding-block: 40px 32px; }
-  .peek { display: none; }
-  .shops { padding-top: 0; }
+  .lay-head { flex-direction: column; gap: 10px; }
+  .spread { padding-top: 48px; gap: 64px 28px; }
+  .item .mb { --w: 128px; }
+  .label { font-size: 20px; }
+  .city-head { grid-template-columns: 1fr; padding-block: 40px 28px; }
+  .city-head .mb { display: none; }
   .shop { grid-template-columns: 1fr; padding-block: 30px 32px; }
   .shop-head { grid-template-columns: 2.4em 1fr; }
   .shop-body { padding: 12px 0 0 2.4em; }
   .shop .blurb { font-size: 16px; }
-  .shop .note { font-size: 19px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
@@ -227,57 +210,41 @@ footer .wrap { display: flex; justify-content: center; padding-block: 8px 32px; 
 </header>
 
 <main id="home-view" hidden>
-  <section class="front limestone" id="front">
-    <div class="facade">
-      <div class="shopfront">
-        <div class="awning">
-          <div class="canopy" aria-hidden="true"></div>
-          <div class="valance"><h1 class="mark">Flâneur</h1></div>
-        </div>
-        <div class="window">
-          <div class="transom" aria-hidden="true"><div class="pane"></div><div class="pane"></div><div class="pane"></div><div class="pane"></div></div>
-          <nav class="pane main-pane menu" aria-label="Cities"><ul id="door-menu"></ul></nav>
-        </div>
-        <div class="door" aria-hidden="true">
-          <div class="pane"></div>
-          <div class="panel"></div>
-          <span class="handle"></span>
-        </div>
-      </div>
+  <section class="lay wrap" id="lay">
+    <div class="lay-head">
+      <h1 class="mark">Flâneur</h1>
+      <p class="lay-note hand">coffee I'd walk for</p>
     </div>
-    <div class="base tiles" aria-hidden="true"></div>
-    <div class="pavement" aria-hidden="true"></div>
+    <nav aria-label="Cities"><ul class="spread" id="spread"></ul></nav>
   </section>
 </main>
 
 <main id="city-view" hidden>
-  <header class="room-head limestone">
-    <div class="wrap room-in">
+  <div class="wrap">
+    <header class="city-head">
       <div>
-        <p class="room-region" id="room-region"></p>
+        <p class="hand" id="room-region"></p>
         <h1 class="room-title" id="city-title" tabindex="-1"></h1>
       </div>
-      <div class="peek" aria-hidden="true"><div class="pane"></div><div class="pane"></div><div class="pane"></div></div>
-    </div>
-  </header>
-  <div class="room-tiles tiles" aria-hidden="true"></div>
-  <section class="wrap" aria-label="Cafés">
-    <ul class="shops" id="shops"></ul>
-  </section>
+      <div id="city-mb" aria-hidden="true"></div>
+    </header>
+    <section aria-label="Cafés">
+      <ul class="shops" id="shops"></ul>
+    </section>
+  </div>
 </main>
 
 <footer>
   <div class="wrap">
     <nav aria-label="All cities"><ul class="foot-cities" id="foot-cities"></ul></nav>
   </div>
-  <div class="foot-tiles tiles" aria-hidden="true"></div>
 </footer>
 
 <script>
 // Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
 // City pages show name, hood, know, blurb and note. The a{} scores are kept in the data but not shown.
 const CITIES = [
-  { id: "boston", name: "Boston", region: "Massachusetts", tz: "America/New_York",
+  { id: "boston", code: "MA", name: "Boston", region: "Massachusetts", tz: "America/New_York",
     shops: [
       { name: "Cicada Coffee Bar", hood: "Cambridge", know: "Vietnamese coffee bar",
         blurb: "Vietnamese-inspired café just across the river, pouring Nguyen Coffee Supply beans. Named Boston Magazine's Best Coffee Shop in 2022 and 2023.",
@@ -292,7 +259,7 @@ const CITIES = [
         blurb: "Coffee from one of the people who started the specialty movement in New England. The menu reads like a wine list.",
         note: "Order whatever's on the brew bar that day.", a: { work: 1, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
     ] },
-  { id: "sacramento", name: "Sacramento", region: "California", tz: "America/Los_Angeles",
+  { id: "sacramento", code: "CA", name: "Sacramento", region: "California", tz: "America/Los_Angeles",
     shops: [
       { name: "Offbeat Coffee", hood: "Land Park", know: "Pop-up turned shop",
         blurb: "Started as a pop-up and opened in Land Park in 2025. Owned by Vivian Tran and Thao Nguyen.",
@@ -313,7 +280,7 @@ const CITIES = [
         blurb: "Sacramento's best-known roaster. Roomy cafés, a long brew menu and plenty of tables.",
         note: "Good spot to sit and work for a few hours.", a: { work: 3, espresso: 2, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
     ] },
-  { id: "nyc", name: "New York", region: "New York", tz: "America/New_York",
+  { id: "nyc", code: "NY", name: "New York", region: "New York", tz: "America/New_York",
     shops: [
       { name: "La Cabra", hood: "East Village", know: "Danish roaster, cardamom buns",
         blurb: "Light-roast coffee from Aarhus, Denmark, with a bakery behind the counter. Copenhagen calm in Manhattan.",
@@ -325,7 +292,7 @@ const CITIES = [
         blurb: "A tiny Cornelia Street bar pouring coffee from Panama. Named to the World's 100 Best Coffee Shops within a year of opening.",
         note: "Small room. Ask about the Geisha.", a: { work: 0, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 2 } }
     ] },
-  { id: "sf", name: "San Francisco", region: "California", tz: "America/Los_Angeles",
+  { id: "sf", code: "CA", name: "San Francisco", region: "California", tz: "America/Los_Angeles",
     shops: [
       { name: "The Coffee Movement", hood: "Nob Hill", know: "Small specialty bar",
         blurb: "A tiny bar with a focused menu of carefully made espresso and filter coffee.",
@@ -340,7 +307,7 @@ const CITIES = [
         blurb: "A small corner bar from a veteran organic roaster. Mostly espresso, done very well.",
         note: "Small menu, all good.", a: { work: 0, espresso: 3, pourover: 1, pastry: 1, cozy: 0, quick: 3 } }
     ] },
-  { id: "cdmx", name: "Ciudad de México", region: "México", tz: "America/Mexico_City",
+  { id: "cdmx", code: "CDMX", name: "Ciudad de México", region: "México", tz: "America/Mexico_City",
     shops: [
       { name: "Café Tormenta", hood: "Roma Norte", know: "Street-corner coffee stand",
         blurb: "A tiny stand on the corner of Puebla and Mérida that brings back the city's tradition of street coffee, with good music playing.",
@@ -397,13 +364,21 @@ function updateNudges() {
   $("nudge-right").addEventListener("click", () => sc.scrollBy({ left: 160 }));
 })();
 
-/* Home: the cities are the menu inside the lit door */
+/* Home: one matchbook per city, laid out on the sheet, each with a note and an arrow */
+const spots = (n) => `${n} ${n === 1 ? "spot" : "spots"}`;
+function matchbook(c, tag) {
+  const attrs = tag === "a" ? ` href="#${c.id}"` : "";
+  return `<${tag} class="mb" data-c="${c.id}"${attrs}>
+    <span class="mb-face"><span class="mb-small">Coffee · ${esc(c.code)}</span><span class="mb-city">${esc(c.name)}</span></span>
+    <span class="mb-flap"></span>${tag === "a" ? `<span class="sr-only">, ${c.shops.length} cafés</span>` : ""}</${tag}>`;
+}
+const ARROW = '<svg viewBox="0 0 34 30" aria-hidden="true"><path d="M2 5 C 14 5, 25 12, 28 25 M21.5 20.5 L28 25.5 L31.5 18"/></svg>';
 function renderIntro() {
-  $("door-menu").innerHTML = CITIES.map((c) =>
-    `<li><a href="#${c.id}"><span class="city">${esc(c.name)}</span><span class="n">${c.shops.length}<span class="sr-only"> ${c.shops.length === 1 ? "café" : "cafés"}</span></span></a></li>`).join("");
-  // the lights come up once; later visits to home skip it
-  $("front").addEventListener("animationend", (e) => {
-    if (e.animationName === "lights-up") $("front").classList.add("lit");
+  $("spread").innerHTML = CITIES.map((c, i) =>
+    `<li class="item" style="--i:${i}">${matchbook(c, "a")}<span class="label hand" aria-hidden="true">${ARROW}${spots(c.shops.length)}</span></li>`).join("");
+  // the flat-lay settles once; later visits to home skip it
+  $("lay").addEventListener("animationend", (e) => {
+    if (e.animationName === "drop") $("lay").classList.add("laid");
   });
 }
 
@@ -415,7 +390,8 @@ const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entr
 function renderCity() {
   const c = state.city;
   $("city-title").textContent = c.name;
-  $("room-region").textContent = `${c.region} · ${count(c.shops.length)}`;
+  $("room-region").textContent = `${c.region} · ${spots(c.shops.length)}`;
+  $("city-mb").innerHTML = matchbook(c, "div");
   $("shops").innerHTML = c.shops.map((s, i) => `
     <li class="shop" style="--d:${Math.min(i, 6) * 90}ms">
       <div class="shop-head">
