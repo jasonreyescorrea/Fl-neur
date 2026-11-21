@@ -59,9 +59,7 @@ a { color: inherit; text-decoration: none; }
 
 /* a field: small grey label, a hairline, the value */
 .field { border-top: 1px solid var(--hair); padding-top: 5px; min-width: 0; }
-.lbl { display: block; font-size: 9px; font-weight: 500; letter-spacing: .02em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
 .val { font-weight: 500; font-size: 14px; line-height: 1.2; }
-.fields { row-gap: 18px; padding-bottom: 10px; }
 
 /* the picture: the flâneur, drawn in pencil on grey */
 .photo { position: relative; aspect-ratio: 1 / 1; background: var(--photo); overflow: hidden; }
@@ -76,20 +74,22 @@ a { color: inherit; text-decoration: none; }
 
 .body { align-items: start; padding-top: 16px; }
 .pic { grid-column: 1 / 3; }
-.copy { grid-column: 3; display: grid; gap: 12px; }
-.copy p { font-weight: 500; font-size: 14px; line-height: 1.25; max-width: 26ch; }
-.side { grid-column: 4; display: grid; gap: 14px; align-content: start; }
-.side .block { margin-top: clamp(20px, 6vw, 72px); }
+.side { grid-column: 3 / 5; align-self: stretch; display: flex; flex-direction: column; }
+.side .field { padding-block: 8px 14px; }
+.side .field .val { font-size: 17px; }
+.side .block { margin-top: auto; aspect-ratio: 2 / 1; }
+.side-city .block { aspect-ratio: auto; flex: 1; }
+.side-city .block span { font-size: clamp(32px, 4.4vw, 60px); }
 .side a.field .val { transition: transform .3s var(--ease); display: inline-block; }
 .side a.field:hover .val, .side a.field:focus-visible .val { transform: translateX(4px); }
 
 /* the cafés, as rows of fields */
 .shops { list-style: none; margin: clamp(36px, 6vw, 64px) 0 0; padding: 0; }
-.shop { position: relative; padding-block: 0 22px; opacity: 0; transform: translateY(10px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
+.shop { position: relative; padding-block: 0 26px; opacity: 0; transform: translateY(10px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
 .shop.in { opacity: 1; transform: none; }
-.shop .field { border-top-color: var(--rule); }
-.shop h2 { font-weight: 600; font-size: 16px; line-height: 1.15; letter-spacing: -.01em; }
-.shop .blurb { grid-column: 3 / 5; font-weight: 400; font-size: 13px; line-height: 1.45; max-width: 52ch; text-wrap: pretty; }
+.shop .field { border-top-color: var(--rule); padding-top: 12px; }
+.shop h2 { font-weight: 600; font-size: 18px; line-height: 1.15; letter-spacing: -.01em; }
+.shop .blurb { grid-column: 3 / 5; font-weight: 400; font-size: 14px; line-height: 1.45; max-width: 52ch; text-wrap: pretty; }
 .shop a::after { content: ""; position: absolute; inset: 0; }
 .shop:hover h2, .shop:has(a:focus-visible) h2 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .shop a:focus-visible { outline: none; }
@@ -105,10 +105,13 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
 @media (max-width: 760px) {
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .head .nav { grid-column: 1 / -1; grid-row: 2; padding-top: 16px; }
-  .pic, .copy, .side { grid-column: 1 / -1; }
-  .copy { margin-top: 18px; }
-  .side { margin-top: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); }
-  .side .block { grid-column: 1 / -1; margin-top: 12px; aspect-ratio: 2 / 1; }
+  .pic, .side { grid-column: 1 / -1; }
+  .side { margin-top: 20px; }
+  .side .block { margin-top: 20px; }
+  .side-city .block { aspect-ratio: 2 / 1; flex: none; }
+  .shop .field:nth-child(2) { border-top: 0; padding-top: 0; grid-column: 1 / -1; grid-row: 2; }
+  .shop .field:first-child { grid-column: 1 / -1; }
+  .shop .blurb { border-top: 0; padding-top: 6px; }
   .shop .blurb { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -130,22 +133,15 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
     <h1 class="sr-only">Flâneur</h1>
     <div class="grid body">
       <div class="pic"><div class="photo" id="photo-home"></div></div>
-      <div class="copy"></div>
       <nav class="side" aria-label="Cities" id="side-cities"></nav>
     </div>
   </main>
 
   <main id="city-view" hidden>
-    <div class="grid fields">
-      <div class="field"><span class="lbl">(City)</span><p class="val" id="spec-city"></p></div>
-      <div class="field"><span class="lbl">(Region)</span><p class="val" id="room-region"></p></div>
-    </div>
     <div class="grid body">
       <div class="pic"><div class="photo" id="photo-city"></div></div>
-      <div class="copy">
-        <h1 class="sr-only" id="city-title" tabindex="-1"></h1>
-      </div>
-      <div class="side"><div class="block" aria-hidden="true"><span id="block-name"></span></div></div>
+      <h1 class="sr-only" id="city-title" tabindex="-1"></h1>
+      <div class="side side-city"><div class="block" aria-hidden="true"><span id="block-name"></span></div></div>
     </div>
     <ul class="shops" id="shops"></ul>
   </main>
@@ -263,15 +259,13 @@ const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entr
 function renderCity() {
   const c = state.city;
   $("city-title").textContent = c.name;
-  $("spec-city").textContent = c.name;
-  $("room-region").textContent = c.region;
   $("block-name").textContent = c.name;
   photo("photo-city");
   $("shops").innerHTML = c.shops.map((s, i) => `
     <li class="shop grid" style="--d:${Math.min(i, 6) * 70}ms">
-      <div class="field"><span class="lbl">(Café)</span><h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> (opens Google Maps in a new tab)</span></a></h2></div>
-      <div class="field"><span class="lbl">(Neighborhood)</span><p class="val">${esc(s.hood)}</p></div>
-      <div class="field blurb"><span class="lbl">(About)</span><p>${esc(s.blurb || s.know)}</p></div>
+      <div class="field"><h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> (opens Google Maps in a new tab)</span></a></h2></div>
+      <div class="field"><p class="val">${esc(s.hood)}</p></div>
+      <div class="field blurb"><p>${esc(s.blurb || s.know)}</p></div>
     </li>`).join("");
   document.querySelectorAll(".shop").forEach((el) => {
     if (!reveal || reduceMotion.matches) el.classList.add("in"); else reveal.observe(el);
