@@ -7,262 +7,179 @@
 <title>Flâneur</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Independent coffee shops worth walking to, in Boston, Sacramento, New York, San Francisco and Mexico City.">
-<meta name="theme-color" content="#F4F2EC">
-<meta name="view-transition" content="same-origin">
+<meta name="theme-color" content="#DCDBD7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Covered+By+Your+Grace&display=swap">
 <style>
-/* Flâneur: five cities hung as framed prints over a sign-yellow band with the name set huge in cobalt.
-   Each city carries colours that belong to it: Boston brick and Common green, Sacramento tree green and
-   golden hour, New York taxi yellow and subway black, San Francisco International Orange and fog,
-   Mexico City rosa mexicano and marigold. Hover a print and the wall takes on its city's light.
-   Type: Bricolage Grotesque (display), Newsreader (café names), Schibsted Grotesk (reading).
-   All free from Google Fonts. No pure black or white anywhere. */
+/* Flâneur as printed matter: one sheet of paper on a grey wall, set like a café menu.
+   Black on off-white, hairline rules, tiny mono labels, a hand-lettered name, a round stamp,
+   and a line doodle of a flâneur. No colour; the paper and the ink do the work.
+   Type: Schibsted Grotesk (names and reading), Newsreader (the printed header lines),
+   IBM Plex Mono (labels), Covered By Your Grace (the provisional hand-lettered wordmark,
+   to be replaced by the real logo). All free from Google Fonts. Never pure black or white. */
 :root {
-  --wall: #F4F2EC;
-  --ink: #1C1B1F;
-  --muted: #5E5D66;
-  --line: #DAD7CE;
-  --cream: #F6EFE2;
-  --cobalt: #2346B8;
-  --yellow: #F3C24B;
+  --wall: #DCDBD7;
+  --paper: #F7F6F2;
+  --ink: #161616;
+  --muted: #62625E;
+  --rule: #161616;
+  --hair: rgba(22, 22, 22, .18);
   --ease: cubic-bezier(.22, 1, .36, 1);
   --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Newsreader", Georgia, serif;
-  --font-display: "Bricolage Grotesque", "Schibsted Grotesk", sans-serif;
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2  0 0 0 0 .2  0 0 0 0 .25  0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --font-hand: "Covered By Your Grace", "Bradley Hand", cursive;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1  0 0 0 0 .1  0 0 0 0 .1  0 0 0 .5 -.22'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
   color-scheme: light;
 }
-/* the cities' colours: c1 is the print and the room, c2 its accent, on is text on c1, tint is the wall's glow */
-[data-c="boston"]     { --c1: #9E3B2B; --c2: #1F5A3D; --on: var(--cream); --tint: #F2E2DA; }
-[data-c="sacramento"] { --c1: #3D6B3F; --c2: #E8A83A; --on: var(--cream); --tint: #E4ECDF; }
-[data-c="nyc"]        { --c1: #F5C518; --c2: #1C1B1F; --on: var(--ink);   --tint: #FAEFC6; }
-[data-c="sf"]         { --c1: #B83A2B; --c2: #D9DCDD; --on: var(--cream); --tint: #E9EAEA; }
-[data-c="cdmx"]       { --c1: #C2306E; --c2: #F2A21B; --on: var(--cream); --tint: #F6DDE7; }
 
 * { box-sizing: border-box; }
 html, body { background: var(--wall); }
-body { color: var(--ink); font-family: var(--font-sans); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-body::after { content: ""; position: fixed; inset: 0; z-index: 50; pointer-events: none; background-image: var(--grain); background-size: 160px; opacity: .55; mix-blend-mode: multiply; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--wall); }
-.wrap {
-  max-width: 1320px; margin: 0 auto;
-  padding-left: max(24px, env(safe-area-inset-left, 0px));
-  padding-right: max(24px, env(safe-area-inset-right, 0px));
-}
+body { color: var(--ink); font-family: var(--font-sans); font-size: 16px; line-height: 1.45; -webkit-font-smoothing: antialiased;
+  padding: max(28px, env(safe-area-inset-top, 0px)) max(28px, env(safe-area-inset-right, 0px)) 48px max(28px, env(safe-area-inset-left, 0px)); }
 h1, h2, h3 { margin: 0; font-weight: 400; }
 p { margin: 0; }
 button, a { font: inherit; color: inherit; }
-button { cursor: pointer; }
-:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.meta-caps { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+/* tiny mono label, as on a spec sheet: ↓ (CITY) */
+.lbl { display: block; font-family: var(--font-mono); font-size: 10px; line-height: 1.3; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 
-/* Sticky header on city pages */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--wall); border-bottom: 1px solid var(--line); }
-.top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
-.brand { font-family: var(--font-display); font-weight: 800; font-size: 22px; line-height: 1; color: var(--cobalt); white-space: nowrap; text-decoration: none; background: var(--yellow); padding: 6px 10px 7px; }
-body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
-.tabs-box { flex: 1; min-width: 0; display: flex; align-items: center; gap: 2px; }
-.tabs-scroll { flex: 1; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; scroll-behavior: smooth; scrollbar-width: none; padding-bottom: 4px; margin-bottom: -4px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade-l, 0px), #000 calc(100% - var(--fade-r, 0px)), transparent 100%); }
-.tabs-scroll::-webkit-scrollbar { display: none; }
-.tabs { display: flex; gap: 2px; width: max-content; margin-left: auto; }
-.tab { border-radius: 999px; padding: 5px 12px; font-size: 15px; white-space: nowrap; text-decoration: none; color: var(--muted); transition: color .15s; }
-.tab:hover { color: var(--ink); }
-.tab[aria-current="page"] { background: var(--ink); color: var(--wall); }
-.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--wall); color: var(--ink); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
+/* the sheet */
+.sheet { position: relative; max-width: 1240px; margin: 0 auto; background: var(--paper); padding: clamp(20px, 3vw, 40px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 20px 40px -24px rgba(0, 0, 0, .25); }
+.sheet::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: var(--grain); background-size: 160px; }
 
-main:not([hidden]) { animation: view-in .5s var(--ease) both; }
-@keyframes view-in { from { opacity: 0; } }
+/* masthead: wordmark, the printed line, the stamp */
+.mast { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(20px, 4vw, 64px); padding-bottom: clamp(16px, 2.4vw, 28px); border-bottom: 1.5px solid var(--rule); }
+.logo { display: block; text-decoration: none; line-height: .8; }
+/* LOGO SLOT: replace .logo-word with the final logo (SVG) when it is ready */
+.logo-word { display: block; font-family: var(--font-hand); font-size: clamp(56px, 8vw, 104px); letter-spacing: -.01em; text-transform: uppercase; transform: rotate(-3deg) scaleY(1.12); transform-origin: left center; }
+.printed { font-family: var(--font-serif); font-size: clamp(15px, 1.3vw, 18px); line-height: 1.2; text-transform: uppercase; letter-spacing: .01em; }
+.printed .sup { font-size: .8em; text-transform: none; font-style: italic; }
+.stamp { width: clamp(84px, 9vw, 116px); aspect-ratio: 1; }
+.stamp text { font-family: var(--font-mono); font-size: 9.4px; letter-spacing: 2.2px; text-transform: uppercase; fill: var(--ink); }
+.stamp .ring { fill: none; stroke: var(--ink); stroke-width: 1; }
+.stamp .doodle path, .doodle path, .doodle circle, .doodle ellipse { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) { .stamp .turn { transform-origin: 60px 60px; animation: turn 40s linear infinite; } @keyframes turn { to { transform: rotate(360deg); } } }
 
-/* ---------- A framed print ---------- */
-.fr { --w: 220px; --ar: 3 / 4; position: relative; display: block; width: var(--w); padding: calc(var(--w) * .04); text-decoration: none;
-  background: var(--frame, #1F1E22);
-  box-shadow: 0 1px 1px rgba(28, 27, 31, .16), 0 6px 12px rgba(28, 27, 31, .08), 0 30px 50px -22px rgba(28, 27, 31, .45);
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-  transition: transform .6s var(--ease), box-shadow .6s var(--ease); will-change: transform; }
-.fr[data-f="wood"] { --frame: linear-gradient(135deg, #C29468, #A97C50 45%, #8E6440); }
-.fr[data-f="white"] { --frame: #FBF9F4; }
-.mat { display: block; padding: calc(var(--w) * .08); background: var(--cream); box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2); }
-.print { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: var(--ar); padding: 9%; overflow: hidden; background: var(--c1); color: var(--on); }
-.print::after { /* paper grain and a glint of glass that follows the tilt */
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
-  background: linear-gradient(calc(115deg + var(--ry, 0deg) * 4), rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, var(--glint, .08)) 45%, rgba(255, 255, 255, 0) 60%), var(--grain); background-size: auto, 160px; }
-.print-n { position: relative; z-index: 1; font-size: max(10px, calc(var(--w) * .048)); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
-.print-city { position: relative; z-index: 1; font-family: var(--font-display); font-weight: 800; font-size: calc(var(--w) * .118); line-height: .92; letter-spacing: -.02em; }
-.print-art { position: absolute; inset: 0; }
-/* the art: one idea per city */
-[data-c="boston"] .print-art { /* brick coursing, a Common-green arch */
-  background: radial-gradient(circle at 68% 100%, var(--c2) 0 34%, transparent 34.5%),
-    repeating-linear-gradient(180deg, transparent 0 13px, rgba(0, 0, 0, .1) 13px 14px); }
-[data-c="sacramento"] .print-art { /* the low sun over the river */
-  background: radial-gradient(circle at 72% 46%, var(--c2) 0 20%, transparent 20.5%),
-    repeating-linear-gradient(180deg, transparent 0 9px, rgba(246, 239, 226, .28) 9px 10px) 0 68% / 100% 20% no-repeat; }
-[data-c="nyc"] .print-art { /* the taxi's checker band, the grid */
-  background: conic-gradient(var(--c2) 0 25%, transparent 0 50%, var(--c2) 0 75%, transparent 0) 0 46% / 22px 22px repeat-x,
-    linear-gradient(90deg, transparent calc(50% - 1px), rgba(28, 27, 31, .16) calc(50% - 1px) calc(50% + 1px), transparent 0); }
-[data-c="sf"] .print-art { /* fog rolling over two towers */
-  background: linear-gradient(180deg, var(--c2) 0 18%, rgba(217, 220, 221, .65) 30%, transparent 52%),
-    linear-gradient(90deg, transparent 58%, rgba(246, 239, 226, .55) 58% 60%, transparent 60% 80%, rgba(246, 239, 226, .55) 80% 82%, transparent 82%); }
-[data-c="cdmx"] .print-art { /* a marigold arch in a rosa wall */
-  background: radial-gradient(ellipse 26% 20% at 70% 36%, var(--c2) 0 99%, transparent 100%),
-    linear-gradient(90deg, transparent 44%, var(--c2) 44% 96%, transparent 96%) 0 100% / 100% 64% no-repeat; }
-[data-c="sf"] .print-n { color: var(--ink); }
+/* city nav, set as a line of the menu */
+.nav { display: flex; flex-wrap: wrap; gap: 4px 22px; padding-block: 12px; border-bottom: 1px solid var(--hair); font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.nav a { text-decoration: none; color: var(--muted); }
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 
-/* ---------- Home ---------- */
-.home { position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden;
-  background: var(--glow, var(--wall)); transition: background-color .8s var(--ease); }
-.home[data-hover] { --glow: var(--tint); }
-.home-top { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding-top: calc(24px + env(safe-area-inset-top, 0px)); color: var(--muted); }
-.home-top .now { color: var(--ink); transition: opacity .3s; }
-/* the wall: prints hung salon-style, overlapping the sign band below */
-.home > nav { position: relative; z-index: 2; align-self: end; }
-.hang { max-width: none; display: flex; align-items: flex-end; justify-content: center; gap: clamp(16px, 1.8vw, 36px); padding-top: clamp(28px, 5vh, 56px); margin-block: 0; list-style: none; }
-.hang li { transform: translateY(var(--y, 0)); }
-.hang li:nth-child(1) { --y: -6vh; } .hang li:nth-child(2) { --y: 2vh; } .hang li:nth-child(3) { --y: -10vh; } .hang li:nth-child(4) { --y: 0vh; } .hang li:nth-child(5) { --y: -4vh; }
-.hang li:nth-child(1) .fr { --w: clamp(150px, 16.5vw, 280px); --ar: 3 / 4; }
-.hang li:nth-child(2) .fr { --w: clamp(180px, 20vw, 340px); --ar: 4 / 3; }
-.hang li:nth-child(3) .fr { --w: clamp(130px, 12.5vw, 210px); --ar: 1 / 1; }
-.hang li:nth-child(4) .fr { --w: clamp(150px, 16.5vw, 280px); --ar: 3 / 4; }
-.hang li:nth-child(5) .fr { --w: clamp(170px, 18.5vw, 310px); --ar: 4 / 3; }
-.hang .fr:hover, .hang .fr:focus-visible { --lift: -10px; box-shadow: 0 1px 1px rgba(28, 27, 31, .16), 0 10px 18px rgba(28, 27, 31, .1), 0 44px 60px -24px rgba(28, 27, 31, .5); }
-.home[data-hover] .hang .fr:not(:hover):not(:focus-visible) { --lift: 4px; filter: saturate(.75); }
-.hang .fr { transition: transform .6s var(--ease), box-shadow .6s var(--ease), filter .6s var(--ease); }
-/* the band: the sign, scaled up to the width of the screen */
-.band { position: relative; z-index: 1; background: var(--yellow); overflow: hidden; margin-top: calc(-1 * clamp(60px, 9vh, 110px)); padding-top: clamp(80px, 13vh, 140px); }
-.mark { display: block; font-family: var(--font-display); font-weight: 800; font-size: 21.6vw; line-height: .74; letter-spacing: -.045em; color: var(--cobalt); white-space: nowrap; text-align: center; translate: 0 .06em; }
+main:not([hidden]) { animation: view-in .45s var(--ease) both; }
+@keyframes view-in { from { opacity: 0; transform: translateY(6px); } }
 
-@media (prefers-reduced-motion: no-preference) {
-  .home:not(.hung) .hang li { animation: hang 1.1s var(--ease) both; animation-delay: calc(.35s + var(--i) * .07s); }
-  .home:not(.hung) .mark { animation: rise 1.2s var(--ease) .05s both; }
-  @keyframes hang { from { opacity: 0; transform: translateY(calc(var(--y, 0px) - 40px)); } }
-  @keyframes rise { from { transform: translateY(40%); } }
-}
+/* ---------- Home: the menu ---------- */
+.menu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(20px, 3vw, 44px); }
+.sec { padding-block: 22px 26px; border-bottom: 1.5px solid var(--rule); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.sec-head a { font-family: var(--font-serif); font-style: italic; font-size: 15px; text-transform: uppercase; letter-spacing: .02em; text-decoration: none; }
+.sec-head a:hover, .sec-head a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+.sec-head .lbl { color: var(--muted); }
+.item { list-style: none; }
+.items { margin: 0; padding: 0; display: grid; gap: 12px; }
+.item a { display: block; text-decoration: none; }
+.item .nm { font-weight: 700; font-size: 13px; letter-spacing: .03em; text-transform: uppercase; }
+.item .ln { font-size: 13px; color: var(--muted); line-height: 1.35; }
+.item a:hover .nm, .item a:focus-visible .nm { text-decoration: underline; text-underline-offset: 3px; }
+/* the doodle sits in the menu's last cell, like the one at Kiyo */
+.doodle-cell { display: flex; align-items: flex-end; justify-content: center; padding-block: 18px 22px; border-bottom: 1.5px solid var(--rule); }
+/* DOODLE SLOT: replace this SVG with the final flâneur doodle when it is ready */
+.doodle { width: min(100%, 220px); height: auto; }
+.colophon { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
 
-/* ---------- City page: the room takes the city's colour ---------- */
-.room { background: var(--c1); color: var(--on); position: relative; z-index: 2; }
-.room::after { content: ""; position: absolute; inset: 0; background-image: var(--grain); background-size: 160px; pointer-events: none; }
-.room-in { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; min-height: clamp(320px, 56vh, 560px); padding-block: 40px 0; }
-.room-meta { display: flex; gap: 28px; padding-bottom: 28px; }
-.room-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(64px, 13vw, 210px); line-height: .8; letter-spacing: -.045em; margin-bottom: -.09em; }
+/* ---------- City page: a spec sheet ---------- */
+.spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 32px); padding-top: 22px; }
+.cell { border-top: 1px solid var(--hair); padding-top: 6px; }
+.cell .v { margin-top: 4px; font-weight: 500; font-size: 14px; }
+.city-hero { display: grid; grid-template-columns: minmax(0, 1fr) clamp(160px, 19vw, 240px); gap: clamp(16px, 2.4vw, 32px); align-items: end; padding-block: clamp(28px, 5vw, 64px) 0; }
+.room-title { font-weight: 700; font-size: clamp(56px, 10vw, 150px); line-height: .84; letter-spacing: -.05em; }
 .room-title:focus { outline: none; }
-.room-title:focus-visible { outline: 2px solid var(--on); outline-offset: 6px; }
-.room .fr { --w: clamp(170px, 18vw, 260px); --ar: 3 / 4; margin-bottom: -90px; z-index: 2; transform: rotate(2.5deg); view-transition-name: print; }
-.room-ledge { height: 10px; background: var(--c2); position: relative; z-index: 0; }
+.room-title:focus-visible { outline: 2px solid var(--ink); outline-offset: 6px; }
+/* the one solid block on the page: ink, with the city reversed out */
+.block { aspect-ratio: 1; background: var(--ink); color: var(--paper); display: grid; place-items: center; padding: 12%; text-align: center; }
+.block span { font-weight: 700; font-size: clamp(22px, 2.6vw, 34px); line-height: .95; letter-spacing: -.02em; }
+.block sup { font-size: .4em; font-weight: 500; vertical-align: top; }
 
-/* the list: an index of cafés */
-.shops { list-style: none; margin: 0; padding: 56px 0 120px; counter-reset: shop; }
-.room ~ section .shops { padding-top: clamp(56px, 9vw, 130px); }
-.shop { position: relative; display: grid; grid-template-columns: 5.5rem minmax(0, 1.1fr) minmax(0, 1fr); gap: 8px 48px; align-items: baseline; padding: 34px 0 36px; border-bottom: 1px solid var(--line); counter-increment: shop; isolation: isolate;
-  opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0ms); }
+.shops { list-style: none; margin: clamp(28px, 4vw, 48px) 0 0; padding: 0; counter-reset: shop; }
+.shop { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 32px); padding-block: 8px 26px; border-top: 1px solid var(--rule); counter-increment: shop;
+  opacity: 0; transform: translateY(12px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
 .shop.in { opacity: 1; transform: none; }
-/* a wash of the city's tint sweeps in under the hovered café */
-.shop::before { content: ""; position: absolute; inset: 0 -24px; z-index: -1; background: var(--tint); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
-.shop:hover::before, .shop:has(a:focus-visible)::before { transform: scaleX(1); }
-.shop::after { content: counter(shop, decimal-leading-zero); grid-column: 1; grid-row: 1; font-family: var(--font-display); font-weight: 500; font-size: 15px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.shop .lbl { margin-bottom: 6px; }
+.shop .no::after { content: counter(shop, decimal-leading-zero); display: block; margin-top: 2px; font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .shop a { text-decoration: none; }
 .shop a::after { content: ""; position: absolute; inset: 0; }
-.shop-head { grid-column: 2; }
-.shop h2 { font-weight: 400; }
-.shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(34px, 4.2vw, 60px); line-height: 1; letter-spacing: -.02em; transition: transform .6s var(--ease); }
-.shop:hover .nm, .shop a:focus-visible .nm { font-style: italic; transform: translateX(6px); }
-.shop .meta { margin-top: 12px; font-size: 15px; color: var(--muted); }
-.shop .ext { display: inline-block; margin-left: .35em; transition: transform .3s var(--ease); }
-.shop:hover .ext { transform: translate(3px, -3px); }
-.shop .blurb { grid-column: 3; max-width: 46ch; line-height: 1.6; text-wrap: pretty; }
+.shop h2 { font-weight: 700; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.1; letter-spacing: -.01em; }
+.shop .v { font-size: 14px; font-weight: 500; }
+.shop .blurb { font-size: 14px; line-height: 1.5; text-wrap: pretty; }
+.shop .ext { margin-left: .3em; display: inline-block; transition: transform .25s var(--ease); }
+.shop:hover h2 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.shop:hover .ext { transform: translate(2px, -2px); }
 .shop a:focus-visible { outline: none; }
-.shop:has(a:focus-visible) { outline: 2px solid var(--cobalt); outline-offset: 4px; }
-
-footer { color: var(--muted); border-top: 1px solid var(--line); }
-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; padding-block: 24px 40px; font-size: 14px; }
-.foot-cities { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; }
-.foot-cities li + li::before { content: "·"; content: "·" / ""; padding-inline: .5em; }
-.foot-cities a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color .15s, text-decoration-color .15s; }
-.foot-cities a:hover, .foot-cities a:focus-visible, .foot-cities a[aria-current="page"] { color: var(--ink); text-decoration-color: currentColor; }
-
-/* page-to-page: the print you click becomes the print on the city page */
-::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
-::view-transition-group(print) { animation-duration: .7s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+.shop:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 4px; }
+.shop:last-child { border-bottom: 1.5px solid var(--rule); }
 
 @media (max-width: 860px) {
-  .top .wrap { flex-wrap: wrap; gap: 6px 12px; }
-  .brand { margin-right: auto; }
-  .tabs-box { order: 3; flex-basis: 100%; }
-  .tabs { margin-left: 0; }
-  .hang { flex-wrap: wrap; align-items: center; gap: 26px 18px; padding-top: 32px; }
-  .band { margin-top: -48px; }
-  .hang li { --y: 0 !important; }
-  .hang li:nth-child(even) { transform: translateY(18px); }
-  .hang li:nth-child(n) .fr { --w: 40vw; }
-  .hang li:nth-child(3) .fr { --w: 32vw; }
-  .band { padding-top: 80px; }
-  .room-in { grid-template-columns: 1fr; min-height: 300px; }
-  .room .fr { display: none; }
-  .room ~ section .shops { padding-top: 16px; }
-  .shop { grid-template-columns: 2.4rem minmax(0, 1fr); gap: 6px 12px; padding-block: 28px 30px; }
-  .shop .blurb { grid-column: 2; margin-top: 10px; font-size: 16px; }
+  body { padding: 12px 12px 32px; }
+  .mast { grid-template-columns: 1fr auto; }
+  .printed { grid-column: 1 / -1; grid-row: 2; }
+  .menu { grid-template-columns: 1fr; }
+  .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 12px; }
+  .city-hero { grid-template-columns: 1fr; }
+  .block { display: none; }
+  .shop { grid-template-columns: 4.5rem minmax(0, 1fr); row-gap: 10px; }
+  .shop > div:nth-child(n+3) { grid-column: 2; }
 }
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; scroll-behavior: auto !important; }
-  main:not([hidden]) { animation: none !important; }
+  * { transition: none !important; animation: none !important; }
   .shop { opacity: 1; transform: none; }
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
 </style>
 </head>
-<body>
+<body data-view="home">
 
-<header class="top" id="top">
-  <div class="wrap">
-    <a class="brand" href="#home">Flâneur</a>
-    <div class="tabs-box">
-      <button type="button" class="nudge" id="nudge-left" aria-label="Scroll cities left" hidden>←</button>
-      <nav class="tabs-scroll" id="tabs-scroll" aria-label="Cities">
-        <div class="tabs" id="tabs"></div>
-      </nav>
-      <button type="button" class="nudge" id="nudge-right" aria-label="Scroll cities right" hidden>→</button>
-    </div>
-  </div>
-</header>
-
-<main id="home-view" hidden>
-  <section class="home" id="home">
-    <div class="home-top wrap meta-caps">
-      <span>Coffee I'd walk for</span>
-      <span class="now" id="now" aria-live="polite"></span>
-    </div>
-    <nav aria-label="Cities"><ul class="hang wrap" id="spread"></ul></nav>
-    <div class="band">
-      <h1 class="mark">Flâneur</h1>
-    </div>
-  </section>
-</main>
-
-<main id="city-view" hidden>
-  <header class="room" id="room">
-    <div class="wrap room-in">
-      <div>
-        <p class="room-meta meta-caps"><span id="room-region"></span></p>
-        <h1 class="room-title" id="city-title" tabindex="-1"></h1>
-      </div>
-      <div id="city-print" aria-hidden="true"></div>
-    </div>
+<article class="sheet">
+  <header class="mast">
+    <a class="logo" href="#home" aria-label="Flâneur, home"><span class="logo-word" aria-hidden="true">Flâneur</span></a>
+    <p class="printed">Café de especialidad<span class="sup">*</span><br>Independent coffee, five cities<br>Boston / Sacramento / NYC / SF / CDMX</p>
+    <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+      <defs><path id="ring" d="M60 60 m-47 0 a47 47 0 1 1 94 0 a47 47 0 1 1 -94 0"/></defs>
+      <circle class="ring" cx="60" cy="60" r="57"/>
+      <g class="turn"><text><textPath href="#ring">Flâneur · coffee I'd walk for · desde 2026 ·</textPath></text></g>
+      <g class="doodle" transform="translate(41 38)">
+        <path d="M6 14 h26 v14 a10 10 0 0 1 -10 10 h-6 a10 10 0 0 1 -10 -10 z"/>
+        <path d="M32 18 h4 a5 5 0 0 1 0 10 h-4"/>
+        <path d="M13 9 c-2 -3 2 -5 0 -8 M20 9 c-2 -3 2 -5 0 -8 M27 9 c-2 -3 2 -5 0 -8"/>
+      </g>
+    </svg>
   </header>
-  <div class="room-ledge" aria-hidden="true"></div>
-  <section class="wrap" aria-label="Cafés">
-    <ul class="shops" id="shops"></ul>
-  </section>
-</main>
+  <nav class="nav" aria-label="Cities" id="tabs"></nav>
 
-<footer>
-  <div class="wrap">
-    <nav aria-label="All cities"><ul class="foot-cities" id="foot-cities"></ul></nav>
-    <span>Flâneur · independent coffee</span>
-  </div>
-</footer>
+  <main id="home-view" hidden>
+    <h1 class="sr-only">Flâneur</h1>
+    <div class="menu" id="menu"></div>
+    <p class="colophon"><span>Independent shops only · rated 4.0+ · Nov 2026</span><span>Flâneur ⁄ printed on the internet</span></p>
+  </main>
+
+  <main id="city-view" hidden>
+    <div class="spec">
+      <div class="cell"><span class="lbl">↓ (City)</span><p class="v" id="spec-city"></p></div>
+      <div class="cell"><span class="lbl">↓ (Region)</span><p class="v" id="room-region"></p></div>
+      <div class="cell"><span class="lbl">↓ (Edition)</span><p class="v">Nov 2026</p></div>
+      <div class="cell"><span class="lbl">↓ (Criteria)</span><p class="v">Independent, 4.0+</p></div>
+    </div>
+    <div class="city-hero">
+      <h1 class="room-title" id="city-title" tabindex="-1"></h1>
+      <div class="block" aria-hidden="true"><span id="block-name"></span></div>
+    </div>
+    <ul class="shops" id="shops"></ul>
+    <p class="colophon"><span id="foot-cities"></span><span>Flâneur ⁄ printed on the internet</span></p>
+  </main>
+</article>
 
 <script>
 // Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
@@ -346,89 +263,44 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const state = { city: null }; // null = home page
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 const shortName = (c) => ({ cdmx: "CDMX", nyc: "NYC", sf: "SF" }[c.id] || c.name);
-const count = (n) => `${n} ${n === 1 ? "café" : "cafés"}`;
 const mapsUrl = (s, c) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${s.name} ${s.hood} ${c.name}`);
 function pickView() { state.city = CITIES.find((c) => c.id === location.hash.slice(1)) || null; }
 
-/* City tabs with visible scroll affordances */
-function renderTabs() {
-  const items = [{ id: "home", label: "Home", sel: !state.city }]
-    .concat(CITIES.map((c) => ({ id: c.id, label: shortName(c), sel: state.city && state.city.id === c.id })));
-  $("tabs").innerHTML = items.map((t) =>
-    `<a class="tab" id="tab-${t.id}" href="#${t.id}"${t.sel ? ' aria-current="page"' : ""}>${esc(t.label)}</a>`).join("");
-  const active = document.querySelector('.tab[aria-current="page"]');
-  if (active) {
-    const sc = $("tabs-scroll");
-    const l = active.offsetLeft - sc.offsetLeft, r = l + active.offsetWidth;
-    if (l < sc.scrollLeft || r > sc.scrollLeft + sc.clientWidth) sc.scrollLeft = l - 24;
-  }
-  updateNudges();
+function renderNav() {
+  const items = [{ id: "home", label: "Menu", sel: !state.city }]
+    .concat(CITIES.map((c) => ({ id: c.id, label: c.name, sel: state.city === c })));
+  $("tabs").innerHTML = items.map((t) => `<a href="#${t.id}"${t.sel ? ' aria-current="page"' : ""}>${esc(t.label)}</a>`).join("");
 }
-function updateNudges() {
-  const sc = $("tabs-scroll");
-  const max = sc.scrollWidth - sc.clientWidth;
-  const atStart = sc.scrollLeft <= 2, atEnd = sc.scrollLeft >= max - 2;
-  const overflow = max > 2;
-  $("nudge-left").hidden = !overflow || atStart;
-  $("nudge-right").hidden = !overflow || atEnd;
-  sc.style.setProperty("--fade-l", overflow && !atStart ? "28px" : "0px");
-  sc.style.setProperty("--fade-r", overflow && !atEnd ? "28px" : "0px");
-}
-(function wireTabScroll() {
-  const sc = $("tabs-scroll");
-  sc.addEventListener("scroll", updateNudges, { passive: true });
-  window.addEventListener("resize", updateNudges);
-  sc.addEventListener("wheel", (e) => {
-    if (sc.scrollWidth <= sc.clientWidth || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-    e.preventDefault(); sc.scrollLeft += e.deltaY;
-  }, { passive: false });
-  $("nudge-left").addEventListener("click", () => sc.scrollBy({ left: -160 }));
-  $("nudge-right").addEventListener("click", () => sc.scrollBy({ left: 160 }));
-})();
 
-/* Home: the cities hung as framed prints; hover one and the wall takes its light */
-const FRAMES = { boston: "black", sacramento: "wood", nyc: "white", sf: "black", cdmx: "wood" };
-function framed(c, tag) {
-  const attrs = tag === "a" ? ` href="#${c.id}"` : "";
-  return `<${tag} class="fr" data-f="${FRAMES[c.id] || "black"}" data-c="${c.id}"${attrs}><span class="mat"><span class="print" data-c="${c.id}">
-    <span class="print-art"></span><span class="print-n">${esc(c.region)}</span><span class="print-city">${esc(c.name)}</span>
-  </span></span></${tag}>`;
-}
-const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+/* The doodle: a flâneur out walking with a coffee. Provisional, until the final drawing arrives. */
+const DOODLE = `<svg class="doodle" viewBox="0 0 200 230" role="img" aria-label="Line drawing of a flâneur walking with a coffee">
+  <path d="M86 30 c-2 -14 30 -16 30 0"/><path d="M78 31 h46"/>
+  <ellipse cx="100" cy="48" rx="15" ry="17"/>
+  <path d="M95 46 v1 M106 46 v1 M98 56 c2 2 5 2 7 0"/>
+  <path d="M100 65 c-14 4 -20 16 -22 40 l-6 60 h56 l-6 -60 c-2 -24 -8 -36 -22 -40"/>
+  <path d="M100 66 l-6 26 l6 6 l6 -6 z"/>
+  <path d="M80 92 c-10 10 -14 20 -12 32 l14 -4"/>
+  <path d="M122 90 c14 4 22 10 24 16"/>
+  <path d="M140 98 h18 v14 a6 6 0 0 1 -6 6 h-6 a6 6 0 0 1 -6 -6 z"/><path d="M158 102 h3 a3 3 0 0 1 0 6 h-3"/>
+  <path d="M146 92 c-2 -3 2 -5 0 -8 M152 92 c-2 -3 2 -5 0 -8"/>
+  <path d="M88 165 l-6 46 h-12 M112 165 l10 44 h12"/>
+  <path d="M60 128 l-14 84"/><path d="M60 128 c-4 -4 -10 -2 -10 3"/>
+  <path d="M30 214 h140"/>
+</svg>`;
+
+/* Home: every café, set like a menu, one section per city */
 function renderIntro() {
-  const home = $("home");
-  $("spread").innerHTML = CITIES.map((c, i) => `<li style="--i:${i}">${framed(c, "a")}</li>`).join("");
-  home.addEventListener("animationend", (e) => { if (e.animationName === "hang") home.classList.add("hung"); });
-  $("spread").querySelectorAll(".fr").forEach((fr) => {
-    const c = CITIES.find((x) => x.id === fr.dataset.c);
-    const enter = () => { home.dataset.hover = ""; home.dataset.c = c.id; $("now").textContent = c.name; };
-    const leave = () => { delete home.dataset.hover; $("now").textContent = ""; fr.style.removeProperty("--rx"); fr.style.removeProperty("--ry"); fr.style.removeProperty("--glint"); };
-    fr.addEventListener("pointerenter", enter); fr.addEventListener("focus", enter);
-    fr.addEventListener("pointerleave", leave); fr.addEventListener("blur", leave);
-    // a slight tilt toward the pointer, with the glass catching the light
-    fr.addEventListener("pointermove", (e) => {
-      if (!finePointer.matches || reduceMotion.matches) return;
-      const r = fr.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      fr.style.setProperty("--ry", (x * 10).toFixed(2) + "deg");
-      fr.style.setProperty("--rx", (-y * 8).toFixed(2) + "deg");
-      fr.style.setProperty("--glint", (.08 + Math.abs(x) * .22).toFixed(3));
-    });
-    // walking in: the print you click becomes the print on the city page
-    fr.addEventListener("click", (e) => {
-      if (!document.startViewTransition || reduceMotion.matches || e.metaKey || e.ctrlKey || e.shiftKey) return;
-      e.preventDefault();
-      fr.style.viewTransitionName = "print";
-      const t = document.startViewTransition(() => {
-        fr.style.viewTransitionName = "";
-        history.pushState(null, "", "#" + c.id);
-        pickView(); renderAll(); window.scrollTo(0, 0);
-      });
-      t.finished.then(() => $("city-title").focus({ preventScroll: true }));
-    });
-  });
+  const secs = CITIES.map((c) => `
+    <section class="sec" aria-labelledby="sec-${c.id}">
+      <div class="sec-head"><a id="sec-${c.id}" href="#${c.id}">${esc(c.name)}</a><span class="lbl">${esc(c.region)}</span></div>
+      <ul class="items">${c.shops.map((s) => `
+        <li class="item"><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">
+          <span class="nm">${esc(s.name)}</span><span class="sr-only"> (opens Google Maps in a new tab)</span>
+          <span class="ln" style="display:block">${esc(s.hood)} · ${esc(s.know)}</span></a></li>`).join("")}
+      </ul>
+    </section>`).join("");
+  $("menu").innerHTML = secs + `<div class="doodle-cell">${DOODLE}</div>`;
 }
 
 /* City page */
@@ -439,16 +311,17 @@ const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entr
 function renderCity() {
   const c = state.city;
   $("city-title").textContent = c.name;
+  $("spec-city").textContent = c.name;
   $("room-region").textContent = c.region;
-  $("city-print").innerHTML = framed(c, "div");
+  $("block-name").innerHTML = `${esc(shortName(c))}<sup>®</sup>`;
   $("shops").innerHTML = c.shops.map((s, i) => `
-    <li class="shop" style="--d:${Math.min(i, 6) * 80}ms">
-      <div class="shop-head">
-        <h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener"><span class="nm">${esc(s.name)}</span><span class="sr-only"> (opens Google Maps in a new tab)</span></a></h2>
-        <p class="meta">${esc(s.hood)} · ${esc(s.know)}<span class="ext" aria-hidden="true">↗</span></p>
-      </div>
-      ${s.blurb ? `<p class="blurb">${esc(s.blurb)}</p>` : ""}
+    <li class="shop" style="--d:${Math.min(i, 6) * 70}ms">
+      <div><span class="lbl">↓ (No.)</span><span class="no" aria-hidden="true"></span></div>
+      <div><span class="lbl">↓ (Café)</span><h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> (opens Google Maps in a new tab)</span></a><span class="ext" aria-hidden="true">↗</span></h2></div>
+      <div><span class="lbl">↓ (Neighborhood)</span><p class="v">${esc(s.hood)}</p><p class="v" style="color:var(--muted);font-weight:400">${esc(s.know)}</p></div>
+      <div><span class="lbl">↓ (About)</span><p class="blurb">${esc(s.blurb || "")}</p></div>
     </li>`).join("");
+  $("foot-cities").textContent = CITIES.map(shortName).join(" / ");
   document.querySelectorAll(".shop").forEach((el) => {
     if (!reveal || reduceMotion.matches) el.classList.add("in"); else reveal.observe(el);
   });
@@ -459,17 +332,9 @@ function renderAll() {
   $("home-view").hidden = !home;
   $("city-view").hidden = home;
   document.body.dataset.view = home ? "home" : "city";
-  if (home) delete document.body.dataset.c; else document.body.dataset.c = state.city.id;
   document.title = home ? "Flâneur" : `${state.city.name} · Flâneur`;
-  renderTabs();
-  renderFooter();
+  renderNav();
   if (!home) renderCity();
-}
-
-/* Footer: every city as a real link, the current one marked */
-function renderFooter() {
-  $("foot-cities").innerHTML = CITIES.map((c) =>
-    `<li><a href="#${c.id}"${state.city === c ? ' aria-current="page"' : ""}>${esc(shortName(c))}</a></li>`).join("");
 }
 
 window.addEventListener("hashchange", () => {
@@ -477,12 +342,10 @@ window.addEventListener("hashchange", () => {
   // no page load happened, so move focus to the new city's heading for keyboard and screen reader users
   if (state.city) $("city-title").focus({ preventScroll: true });
 });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateNudges);
 
 pickView();
 renderIntro();
 renderAll();
-
 </script>
 </body>
 </html>
