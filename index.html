@@ -53,7 +53,7 @@ a { color: inherit; text-decoration: none; }
 .logo { grid-column: 1; justify-self: start; line-height: .8; }
 /* LOGO SLOT: replace .logo-word with the final hand-lettered logo (SVG) when it is ready */
 .logo-word { display: block; font-family: var(--font-hand); font-size: 30px; text-transform: uppercase; letter-spacing: .01em; transform: rotate(-3deg) scaleY(1.15); transform-origin: left; }
-.head .nav { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 2px 16px; font-weight: 500; font-size: 11px; line-height: 1.3; padding-top: 6px; }
+.head .nav { grid-column: 1 / -1; grid-row: 1; justify-self: center; justify-content: center; display: flex; flex-wrap: wrap; gap: 2px 16px; font-weight: 500; font-size: 11px; line-height: 1.3; padding-top: 6px; }
 .nav a { color: var(--muted); transition: color .2s; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--ink); }
 
@@ -70,26 +70,21 @@ a { color: inherit; text-decoration: none; }
 
 /* the one flat block */
 .block { aspect-ratio: 1 / 1; background: var(--accent); display: grid; place-items: center; padding: 10%; text-align: center; color: var(--ink); text-decoration: none; transition: background-color .3s var(--ease); }
-.block span { font-weight: 600; font-size: clamp(22px, 2.6vw, 34px); line-height: .98; letter-spacing: -.025em; }
+.block span { font-family: var(--font-hand); font-weight: 400; text-transform: uppercase; font-size: clamp(36px, 5vw, 68px); line-height: .9; letter-spacing: .01em; transform: rotate(-3deg) scaleY(1.15); }
 
 .body { align-items: start; padding-top: 16px; }
 .pic { grid-column: 1 / 3; }
 .side { grid-column: 3 / 5; align-self: stretch; display: flex; flex-direction: column; }
-.side .field { padding-block: 8px 14px; }
-.side .field .val { font-size: 17px; }
 .side .block { margin-top: auto; aspect-ratio: 2 / 1; }
 .side-city .block { aspect-ratio: auto; flex: 1; }
-.side-city .block span { font-size: clamp(32px, 4.4vw, 60px); }
-.side a.field .val { transition: transform .3s var(--ease); display: inline-block; }
-.side a.field:hover .val, .side a.field:focus-visible .val { transform: translateX(4px); }
 
 /* the cafés, as rows of fields */
 .shops { list-style: none; margin: clamp(36px, 6vw, 64px) 0 0; padding: 0; }
 .shop { position: relative; padding-block: 0 26px; opacity: 0; transform: translateY(10px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
 .shop.in { opacity: 1; transform: none; }
 .shop .field { border-top-color: var(--rule); padding-top: 12px; }
-.shop h2 { font-weight: 600; font-size: 18px; line-height: 1.15; letter-spacing: -.01em; }
-.shop .blurb { grid-column: 3 / 5; font-weight: 400; font-size: 14px; line-height: 1.45; max-width: 52ch; text-wrap: pretty; }
+.shop h2 { font-weight: 600; font-size: 20px; line-height: 1.15; letter-spacing: -.01em; }
+.shop .val { font-size: 20px; font-weight: 400; line-height: 1.15; color: var(--muted); }
 .shop a::after { content: ""; position: absolute; inset: 0; }
 .shop:hover h2, .shop:has(a:focus-visible) h2 { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .shop a:focus-visible { outline: none; }
@@ -111,8 +106,6 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
   .side-city .block { aspect-ratio: 2 / 1; flex: none; }
   .shop .field:nth-child(2) { border-top: 0; padding-top: 0; grid-column: 1 / -1; grid-row: 2; }
   .shop .field:first-child { grid-column: 1 / -1; }
-  .shop .blurb { border-top: 0; padding-top: 6px; }
-  .shop .blurb { grid-column: 1 / -1; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
@@ -133,7 +126,7 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
     <h1 class="sr-only">Flâneur</h1>
     <div class="grid body">
       <div class="pic"><div class="photo" id="photo-home"></div></div>
-      <nav class="side" aria-label="Cities" id="side-cities"></nav>
+      <div class="side side-city" id="side-home"></div>
     </div>
   </main>
 
@@ -150,80 +143,13 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
 
 <script>
 // Independent specialty shops rated 4.0+ on Yelp, Nov 2026.
-// City pages show name, hood, know, blurb and note. The a{} scores are kept in the data but not shown.
+// One café per city, kept on purpose.
 const CITIES = [
-  { id: "boston", code: "MA", name: "Boston", region: "Massachusetts", tz: "America/New_York",
-    shops: [
-      { name: "Cicada Coffee Bar", hood: "Cambridge", know: "Vietnamese coffee bar",
-        blurb: "Vietnamese-inspired café just across the river, pouring Nguyen Coffee Supply beans. Named Boston Magazine's Best Coffee Shop in 2022 and 2023.",
-        note: "Try the egg coffee or a cà phê sữa đá.", a: { work: 1, espresso: 2, pourover: 1, pastry: 2, cozy: 3, quick: 1 } },
-      { name: "Gracenote Coffee", hood: "Leather District", know: "Espresso bar and roaster",
-        blurb: "A small bar near South Station from a Boston roaster known for bright, carefully roasted coffee.",
-        note: "Tiny room. Take it to go and walk.", a: { work: 0, espresso: 3, pourover: 2, pastry: 0, cozy: 0, quick: 3 } },
-      { name: "Ogawa Coffee", hood: "Downtown", know: "Latte art, Kyoto roaster",
-        blurb: "The Boston outpost of a Kyoto roaster, with a big room downtown and some of the city's best latte art.",
-        note: "Watch the baristas pour.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 1, quick: 1 } },
-      { name: "George Howell Coffee", hood: "Downtown Crossing", know: "Single-origin pour-overs",
-        blurb: "Coffee from one of the people who started the specialty movement in New England. The menu reads like a wine list.",
-        note: "Order whatever's on the brew bar that day.", a: { work: 1, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
-    ] },
-  { id: "sacramento", code: "CA", name: "Sacramento", region: "California", tz: "America/Los_Angeles",
-    shops: [
-      { name: "Offbeat Coffee", hood: "Land Park", know: "Pop-up turned shop",
-        blurb: "Started as a pop-up and opened in Land Park in 2025. Owned by Vivian Tran and Thao Nguyen.",
-        note: "New and already a local favorite.", a: { work: 1, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
-      { name: "Milka Coffee Roasters", hood: "Mansion Flats", know: "Downtown roaster",
-        blurb: "A downtown roaster and café made in Mansion Flats, with a loyal crowd of regulars.",
-        note: "Ask what they roasted this week.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 1 } },
-      { name: "Camellia Coffee", hood: "R Street", know: "Local roaster, R Street café",
-        blurb: "A Sacramento roaster with its café on R Street near the Capitol, in the WAL Public Market building.",
-        note: "Grab a bag of whatever's freshly roasted.", a: { work: 2, espresso: 3, pourover: 2, pastry: 1, cozy: 2, quick: 2 } },
-      { name: "Pachamama Coffee", hood: "East Sacramento", know: "Farmer-owned, organic",
-        blurb: "A cooperative owned by the farmers who grow the coffee. Everything is organic.",
-        note: "The money goes back to the growers.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 1, quick: 2 } },
-      { name: "Mast Coffee", hood: "Sacramento", know: "Specialty café",
-        blurb: "A well-reviewed independent café with a focused specialty menu.",
-        note: "Good espresso, calm room.", a: { work: 2, espresso: 3, pourover: 1, pastry: 1, cozy: 2, quick: 1 } },
-      { name: "Temple Coffee Roasters", hood: "Downtown", know: "Hometown roaster",
-        blurb: "Sacramento's best-known roaster. Roomy cafés, a long brew menu and plenty of tables.",
-        note: "Good spot to sit and work for a few hours.", a: { work: 3, espresso: 2, pourover: 3, pastry: 1, cozy: 1, quick: 1 } }
-    ] },
-  { id: "nyc", code: "NY", name: "New York", region: "New York", tz: "America/New_York",
-    shops: [
-      { name: "La Cabra", hood: "East Village", know: "Danish roaster, cardamom buns",
-        blurb: "Light-roast coffee from Aarhus, Denmark, with a bakery behind the counter. Copenhagen calm in Manhattan.",
-        note: "Cardamom bun and a filter coffee.", a: { work: 0, espresso: 2, pourover: 3, pastry: 3, cozy: 1, quick: 2 } },
-      { name: "Sey Coffee", hood: "East Williamsburg", know: "Very light roasts",
-        blurb: "An airy roastery with some of the lightest, fruitiest coffee in the city.",
-        note: "If you like it bright, this is the one.", a: { work: 1, espresso: 2, pourover: 3, pastry: 0, cozy: 1, quick: 1 } },
-      { name: "Arcane Estate Coffee", hood: "West Village", know: "Panamanian estate coffee",
-        blurb: "A tiny Cornelia Street bar pouring coffee from Panama. Named to the World's 100 Best Coffee Shops within a year of opening.",
-        note: "Small room. Ask about the Geisha.", a: { work: 0, espresso: 3, pourover: 3, pastry: 1, cozy: 1, quick: 2 } }
-    ] },
-  { id: "sf", code: "CA", name: "San Francisco", region: "California", tz: "America/Los_Angeles",
-    shops: [
-      { name: "The Coffee Movement", hood: "Nob Hill", know: "Small specialty bar",
-        blurb: "A tiny bar with a focused menu of carefully made espresso and filter coffee.",
-        note: "Small space, big flavor.", a: { work: 0, espresso: 3, pourover: 3, pastry: 0, cozy: 1, quick: 3 } },
-      { name: "Golden Goat Coffee", hood: "SoMa", know: "Roaster, tucked-away café",
-        blurb: "A SoMa roaster and café off a quiet alley near South Park, with good coffee and good food.",
-        note: "Worth finding the alley.", a: { work: 2, espresso: 3, pourover: 2, pastry: 2, cozy: 2, quick: 2 } },
-      { name: "Saint Frank", hood: "Russian Hill", know: "Light, airy room",
-        blurb: "White walls, wood and a sunny room on Polk Street. Calm, polished and easy to love.",
-        note: "Window seat in the afternoon.", a: { work: 2, espresso: 2, pourover: 2, pastry: 1, cozy: 3, quick: 1 } },
-      { name: "Linea Caffe", hood: "Mission", know: "Organic roaster, espresso bar",
-        blurb: "A small corner bar from a veteran organic roaster. Mostly espresso, done very well.",
-        note: "Small menu, all good.", a: { work: 0, espresso: 3, pourover: 1, pastry: 1, cozy: 0, quick: 3 } }
-    ] },
-  { id: "cdmx", code: "CDMX", name: "Ciudad de México", region: "México", tz: "America/Mexico_City",
-    shops: [
-      { name: "Café Tormenta", hood: "Roma Norte", know: "Street-corner coffee stand",
-        blurb: "A tiny stand on the corner of Puebla and Mérida that brings back the city's tradition of street coffee, with good music playing.",
-        note: "Drink it on the corner.", a: { work: 0, espresso: 2, pourover: 1, pastry: 0, cozy: 1, quick: 3 } },
-      { name: "El Minutito", hood: "Juárez", know: "Stand-up café-bar",
-        blurb: "A vintage, European-style café-bar on Londres where you drink standing up, with 60s music and pressed sandwiches.",
-        note: "Get the sándwich planchado.", a: { work: 0, espresso: 2, pourover: 1, pastry: 1, cozy: 2, quick: 3 } }
-    ] }
+  { id: "boston", name: "Boston", shops: [{ name: "Cicada Coffee Bar", hood: "Cambridge" }] },
+  { id: "sacramento", name: "Sacramento", shops: [{ name: "Camellia Coffee", hood: "R Street" }] },
+  { id: "nyc", name: "New York", shops: [{ name: "Arcane Estate Coffee", hood: "West Village" }] },
+  { id: "sf", name: "San Francisco", shops: [{ name: "Golden Goat Coffee", hood: "SoMa" }] },
+  { id: "cdmx", name: "Ciudad de México", shops: [{ name: "El Minutito", hood: "Juárez" }] }
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -247,9 +173,7 @@ function renderNav() {
 
 function renderIntro() {
   photo("photo-home");
-  $("side-cities").innerHTML = CITIES.map((c, i) =>
-    `<a class="field" href="#${c.id}"><span class="val">${esc(c.name)}</span></a>`).join("") +
-    `<div class="block" aria-hidden="true"><span>Flâneur<br>Coffee</span></div>`;
+  $("side-home").innerHTML = `<div class="block" aria-hidden="true"><span>Flâneur<br>Coffee</span></div>`;
 }
 
 const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
@@ -265,7 +189,6 @@ function renderCity() {
     <li class="shop grid" style="--d:${Math.min(i, 6) * 70}ms">
       <div class="field"><h2><a href="${mapsUrl(s, c)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> (opens Google Maps in a new tab)</span></a></h2></div>
       <div class="field"><p class="val">${esc(s.hood)}</p></div>
-      <div class="field blurb"><p>${esc(s.blurb || s.know)}</p></div>
     </li>`).join("");
   document.querySelectorAll(".shop").forEach((el) => {
     if (!reveal || reduceMotion.matches) el.classList.add("in"); else reveal.observe(el);
