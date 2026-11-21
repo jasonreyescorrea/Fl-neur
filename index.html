@@ -7,38 +7,40 @@
 <title>Flâneur</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="A short list of independent coffee shops worth walking to, in Boston, Sacramento, New York, San Francisco and Mexico City.">
-<meta name="theme-color" content="#22211E">
+<meta name="theme-color" content="#EEE7DB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Delicious+Handrawn&display=swap">
 <style>
-/* Flâneur after dark. A weathered concrete front on a Mexico City street, a worn awning, and one
-   open door with a coral room glowing behind it. The light is the only color; everything else is
-   stone, steel and shadow. Nordic restraint keeps it quiet: one accent, generous space, one reading face.
-   Type: Newsreader (names, headings) and Schibsted Grotesk (interface). Free from Google Fonts.
-   The site is night-only by design: warm light reads best against dark stone. */
+/* Flâneur is a corner café: a pale limestone front, a cream-tiled base, an oxblood awning with the
+   name painted on by hand, and an oxblood-framed window with the room glowing orange behind it.
+   One warm light, three materials (stone, tile, painted steel), very few words.
+   Type: Newsreader (names), Schibsted Grotesk (interface), Delicious Handrawn (the painted sign only).
+   All free from Google Fonts. Neutrals are tinted warm; nothing is pure black or white. */
 :root {
-  --stone: #22211E;       /* concrete in shadow */
-  --stone-2: #2B2A26;     /* concrete in lamplight */
-  --stone-3: #34322D;
-  --street: #191816;      /* pavement */
-  --ink: #EDE4D8;         /* warm paper white, never pure */
-  --muted: #A69D91;
-  --faint: #8F877C;
-  --line: #3B3833;
-  --steel: #4C514A;       /* weathered green door frame */
-  --glow: #F0876B;        /* coral light, as text on stone */
-  --room: #EE7458;        /* the lit room */
-  --room-hi: #F7A07F;
-  --room-lo: #C9473A;
-  --room-ink: #2A1612;
-  --awning: #77736A;
+  --stone: #EEE7DB;      /* limestone */
+  --stone-2: #E5DCCD;
+  --tile: #F3EDE3;
+  --grout: #D6CBB9;
+  --ink: #2A1F1A;
+  --muted: #6B5E54;
+  --line: #DCD1C0;
+  --oxblood: #6E1F22;
+  --oxblood-2: #571719;
+  --green: #2F4A3A;
+  --wood: #7A4E33;
+  --cream: #F6EEE2;
+  --glow: #F08A4B;       /* the lit room */
+  --glow-hi: #FBC48A;
+  --glow-lo: #D0602F;
+  --glow-ink: #2A1612;
   --ease: cubic-bezier(.25, 1, .5, 1);
   --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Newsreader", Georgia, serif;
-  --concrete: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' preserveAspectRatio='none' viewBox='0 0 1600 1000'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 .009' numOctaves='5' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55  0 0 0 0 .54  0 0 0 0 .50  1.1 0 0 0 -.45'/%3E%3C/filter%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03 .06' numOctaves='3' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 1.4 0 -.62'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)' opacity='.10'/%3E%3Crect width='100%' height='100%' filter='url(%23d)' opacity='.3'/%3E%3C/svg%3E");
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .88  0 0 0 .55 -.22'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  color-scheme: dark;
+  --font-hand: "Delicious Handrawn", "Bradley Hand", cursive;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3  0 0 0 0 .22  0 0 0 0 .16  0 0 0 .5 -.2'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  --stain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .008' numOctaves='5' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .3  1.2 0 0 0 -.5'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23c)' opacity='.12'/%3E%3C/svg%3E");
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -54,16 +56,19 @@ h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
 p { margin: 0; }
 button, a { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.caps { font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
-/* Poured concrete: mottled stains under a fine grain */
-.concrete { background-color: var(--stone); background-image: var(--grain), var(--concrete); background-size: 160px, cover; }
+/* Limestone: soft weathering under a fine grain */
+.limestone { background-color: var(--stone); background-image: var(--grain), var(--stain); background-size: 160px, cover; }
+/* Square cream tiles with grout lines */
+.tiles { background-color: var(--tile);
+  background-image: var(--grain), linear-gradient(var(--grout) 2px, transparent 2px), linear-gradient(90deg, var(--grout) 2px, transparent 2px), linear-gradient(135deg, rgba(255, 255, 255, .5), transparent 45%);
+  background-size: 160px, var(--t, 44px) var(--t, 44px), var(--t, 44px) var(--t, 44px), var(--t, 44px) var(--t, 44px); }
 
 /* Sticky header on city pages */
-.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--street); border-bottom: 1px solid var(--line); }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--stone); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
-.brand { font-family: var(--font-serif); font-style: italic; font-size: 26px; line-height: 1; white-space: nowrap; text-decoration: none; }
+.brand { font-family: var(--font-hand); font-size: 32px; line-height: 1; color: var(--oxblood); white-space: nowrap; text-decoration: none; }
 body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 
 .tabs-box { flex: 1; min-width: 0; display: flex; align-items: center; gap: 2px; }
@@ -74,97 +79,79 @@ body[data-view="home"] .top, body[data-view="home"] footer { display: none; }
 .tabs { display: flex; gap: 2px; width: max-content; margin-left: auto; }
 .tab { border-radius: 999px; padding: 5px 12px; font-size: 15px; white-space: nowrap; text-decoration: none; color: var(--muted); transition: color .15s; }
 .tab:hover { color: var(--ink); }
-.tab[aria-current="page"] { background: var(--room); color: var(--room-ink); }
-.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--street); color: var(--ink); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
+.tab[aria-current="page"] { background: var(--oxblood); color: var(--cream); }
+.nudge { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); background: var(--stone); color: var(--ink); font-size: 14px; line-height: 1; display: grid; place-items: center; padding: 0; }
 
 main:not([hidden]) { animation: view-in .6s var(--ease) both; }
 @keyframes view-in { from { opacity: 0; } }
 
-/* ---------- Home: the front of the café at night ---------- */
-.front { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 34vw); grid-template-rows: auto 1fr auto; column-gap: clamp(32px, 6vw, 96px);
-  padding-inline: clamp(20px, 7vw, 120px); }
-/* the room's light falling on the stone around the door, and onto the pavement */
-.front::before { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 34vw 60vh at var(--door-x, 72%) 62%, rgba(240, 120, 90, .20), transparent 70%),
-    radial-gradient(ellipse 30vw 14vh at var(--door-x, 72%) 100%, rgba(240, 120, 90, .22), transparent 70%); }
+/* ---------- Home: the café front ---------- */
+.front { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
+.facade { flex: 1; display: flex; align-items: flex-end; justify-content: center; padding: calc(40px + env(safe-area-inset-top, 0px)) 20px 0; }
+.shopfront { position: relative; width: min(940px, 100%); display: grid; grid-template-columns: minmax(0, 1fr) clamp(120px, 15vw, 170px); grid-template-rows: auto 1fr; column-gap: 0; }
 
-.awning { grid-column: 1 / -1; position: relative; margin-inline: calc(-1 * clamp(20px, 7vw, 120px));
-  height: clamp(64px, 11vh, 104px); padding-top: env(safe-area-inset-top, 0px);
-  background-color: var(--awning);
-  background-image: var(--grain),
-    linear-gradient(180deg, rgba(255, 245, 230, .06), rgba(0, 0, 0, .28)),
-    repeating-linear-gradient(90deg, rgba(0, 0, 0, .10) 0 1px, transparent 1px 7px, rgba(255, 255, 255, .03) 7px 9px, transparent 9px 23px),
-    linear-gradient(90deg, rgba(0, 0, 0, .12), transparent 20%, rgba(0, 0, 0, .08) 55%, transparent 80%, rgba(0, 0, 0, .14));
-  background-size: 160px, auto, auto, auto;
-  box-shadow: 0 18px 30px -12px rgba(0, 0, 0, .55); }
-.awning::after { content: ""; position: absolute; inset: auto 0 -1px; height: 6px; background: linear-gradient(180deg, rgba(0, 0, 0, .35), transparent); }
+/* the awning: oxblood canvas, the name painted on the valance */
+.awning { grid-column: 1 / -1; position: relative; z-index: 2; margin-inline: -28px; filter: drop-shadow(0 14px 14px rgba(60, 20, 10, .22)); }
+.canopy { height: clamp(40px, 6vh, 64px); background: var(--oxblood-2);
+  background-image: var(--grain), repeating-linear-gradient(90deg, rgba(0, 0, 0, .14) 0 2px, transparent 2px 46px), linear-gradient(180deg, rgba(0, 0, 0, .25), rgba(255, 255, 255, .05));
+  background-size: 160px, auto, auto; clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%); }
+.valance { display: flex; align-items: center; justify-content: center; height: clamp(76px, 11vh, 108px); background: var(--oxblood); background-image: var(--grain); background-size: 160px; }
+.mark { font-family: var(--font-hand); font-weight: 400; font-size: clamp(56px, 8.4vh, 88px); line-height: 1; color: var(--cream); letter-spacing: .01em; translate: 0 .04em; }
 
-.sign { grid-column: 1; grid-row: 2; align-self: center; position: relative; z-index: 1; padding-block: 48px; max-width: 34rem; }
-.sign .caps { color: var(--glow); }
-.mark { margin-top: 18px; font-family: var(--font-serif); font-weight: 300; font-size: clamp(68px, 11vw, 168px); line-height: .9; letter-spacing: -.035em; }
-.lede { margin-top: 28px; max-width: 30ch; font-family: var(--font-serif); font-size: clamp(20px, 1.9vw, 25px); line-height: 1.35; color: var(--muted); text-wrap: pretty; }
-.hours { margin-top: 32px; display: flex; gap: 10px; align-items: center; color: var(--faint); font-size: 14px; }
-.hours::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--room-hi); box-shadow: 0 0 10px 2px rgba(247, 160, 127, .6); }
-
-/* The open door. The room inside is the menu: pick a city to walk in. */
-.door { grid-column: 2; grid-row: 2 / 4; align-self: end; position: relative; z-index: 1; height: min(76vh, 760px); min-height: 460px; margin-top: 32px;
-  border: 10px solid var(--steel); border-bottom: 0; outline: 1px solid rgba(0, 0, 0, .5);
-  background:
-    radial-gradient(ellipse 70% 45% at 50% 12%, var(--room-hi), transparent 70%),
-    radial-gradient(ellipse 120% 80% at 50% 40%, var(--room), var(--room-lo) 85%);
-  box-shadow: 0 0 120px 10px rgba(238, 116, 88, .22), inset 0 0 80px rgba(80, 10, 0, .45); }
-.door::before { /* steel transom bar and the grain of the plaster inside */
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(var(--steel), var(--steel)) 0 16% / 100% 8px no-repeat, var(--grain); background-size: 100% 8px, 160px; mix-blend-mode: normal; opacity: .9; }
-.door::after { /* the threshold: light spilling out over the step */
-  content: ""; position: absolute; left: -10px; right: -10px; bottom: 0; height: 10px; background: linear-gradient(90deg, transparent, rgba(247, 160, 127, .55), transparent); filter: blur(6px); }
-.menu { position: absolute; left: 0; right: 0; top: 16%; padding: 34px clamp(20px, 2.6vw, 36px) 0; color: var(--room-ink); }
-.menu .caps { opacity: .8; }
-.menu ul { list-style: none; margin: 16px 0 0; padding: 0; }
-.menu li + li { border-top: 1px solid rgba(42, 22, 18, .22); }
-.menu a { display: flex; align-items: baseline; gap: 12px; padding: 11px 0 10px; text-decoration: none; }
-.menu .city { font-family: var(--font-serif); font-size: clamp(24px, 2.2vw, 31px); line-height: 1.1; letter-spacing: -.01em; }
-.menu .n { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; opacity: .8; }
+/* the window: oxblood steel, small upper panes, the room glowing behind the glass */
+.window { grid-column: 1; grid-row: 2; position: relative; display: grid; grid-template-rows: auto 1fr; gap: 10px; padding: 10px; background: var(--oxblood); min-height: min(58vh, 560px); }
+.transom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; height: clamp(54px, 9vh, 84px); }
+.pane { position: relative; overflow: hidden; background:
+  radial-gradient(ellipse 70% 120% at 50% 0%, var(--glow-hi), transparent 70%),
+  linear-gradient(180deg, var(--glow), var(--glow-lo)); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .18), inset 0 0 40px rgba(110, 30, 10, .35); }
+/* glass: a faint diagonal sheen from the street */
+.pane::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255, 255, 255, .16), transparent 30%, transparent 62%, rgba(255, 255, 255, .08) 70%, transparent 78%); pointer-events: none; }
+/* amber globe pendants hanging in the room */
+.transom .pane:nth-child(2)::before, .transom .pane:nth-child(3)::before { content: ""; position: absolute; left: 50%; bottom: 10px; width: 18px; height: 18px; translate: -50% 0; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FFF1D2, #FFC27A 55%, #E58A3A); box-shadow: 0 0 18px 8px rgba(255, 196, 120, .55); }
+.main-pane { display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 4vw, 48px); color: var(--glow-ink);
+  background: radial-gradient(ellipse 60% 50% at 30% 10%, var(--glow-hi), transparent 70%), radial-gradient(ellipse 120% 90% at 50% 40%, var(--glow), var(--glow-lo) 90%); }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li + li { border-top: 1px solid rgba(42, 22, 18, .2); }
+.menu a { display: flex; align-items: baseline; gap: 12px; padding: 10px 0 9px; text-decoration: none; }
+.menu .city { font-family: var(--font-serif); font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; letter-spacing: -.01em; }
+.menu .n { margin-left: auto; font-size: 14px; font-variant-numeric: tabular-nums; opacity: .75; }
 .menu a:hover .city, .menu a:focus-visible .city { font-style: italic; }
-.menu a:focus-visible { outline-color: var(--room-ink); outline-offset: 2px; }
-/* candles on the tables near the door */
-.candles { position: absolute; left: 0; right: 0; bottom: 7%; height: 20px; pointer-events: none; }
-.candles i { position: absolute; bottom: 0; width: 6px; height: 9px; border-radius: 50% 50% 45% 45%; background: #FFE2B8;
-  box-shadow: 0 0 8px 3px rgba(255, 200, 140, .75), 0 0 28px 10px rgba(255, 170, 110, .35); }
-.candles i:nth-child(1) { left: 18%; } .candles i:nth-child(2) { left: 46%; bottom: 6px; } .candles i:nth-child(3) { left: 78%; }
+.menu a:focus-visible { outline-color: var(--glow-ink); outline-offset: 2px; }
 
-.pavement { grid-column: 1 / -1; grid-row: 3; position: relative; z-index: 0; margin-inline: calc(-1 * clamp(20px, 7vw, 120px));
-  height: clamp(56px, 10vh, 96px); border-top: 1px solid #3F3B35;
-  background-color: var(--street); background-image: var(--grain), repeating-linear-gradient(90deg, transparent 0 calc(25% - 1px), rgba(0, 0, 0, .45) calc(25% - 1px) 25%); background-size: 160px, auto; }
+/* the door: wood and glass, a brass number */
+.door { grid-column: 2; grid-row: 2; position: relative; margin-left: 10px; background: var(--wood); padding: 12px 12px 0;
+  background-image: var(--grain), linear-gradient(90deg, rgba(0, 0, 0, .12), transparent 30%, rgba(255, 255, 255, .06) 60%, rgba(0, 0, 0, .1)); background-size: 160px, auto;
+  box-shadow: inset 0 0 0 3px var(--oxblood); display: grid; grid-template-rows: 1fr 30%; gap: 12px; }
+.door .pane { border-radius: 2px; }
+.door .panel { background: rgba(0, 0, 0, .08); box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .12); margin-bottom: 12px; }
+.door .handle { position: absolute; left: 8px; top: 56%; width: 5px; height: 34px; border-radius: 3px; background: linear-gradient(90deg, #B98A4B, #E9C27E, #A97A3B); }
+
+/* the base: cream tiles, the step, the light falling out onto the pavement */
+.base { --t: clamp(28px, 3.4vh, 40px); height: clamp(90px, 15vh, 150px); border-top: 10px solid var(--oxblood); position: relative; }
+.base::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse min(40vw, 480px) 70% at 50% 0%, rgba(240, 138, 75, .22), transparent 70%); pointer-events: none; }
+.pavement { height: clamp(28px, 5vh, 52px); background: var(--stone-2); background-image: var(--grain); background-size: 160px; border-top: 1px solid var(--grout); }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* the lights come up when you arrive */
-  .front:not(.lit) .door { animation: lights-up 1.6s var(--ease) .15s both; }
-  .front:not(.lit)::before { animation: fade-in 2s var(--ease) .3s both; }
-  .front:not(.lit) .sign > * { animation: rise .9s var(--ease) both; animation-delay: calc(.2s + var(--i, 0) * .09s); }
-  .candles i { animation: flicker 3.2s ease-in-out infinite alternate; }
-  .candles i:nth-child(2) { animation-duration: 2.6s; animation-delay: -.8s; }
-  .candles i:nth-child(3) { animation-duration: 3.8s; animation-delay: -1.7s; }
-  @keyframes lights-up { from { filter: brightness(.25) saturate(.6); } }
-  @keyframes fade-in { from { opacity: 0; } }
-  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
-  @keyframes flicker { 0% { opacity: 1; transform: scale(1); } 40% { opacity: .82; transform: scale(.94, 1.04); } 70% { opacity: .95; } 100% { opacity: .78; transform: scale(1.03, .96); } }
+  .front:not(.lit) .pane { animation: lights-up 1.4s var(--ease) .1s both; }
+  .front:not(.lit) .mark { animation: rise 1s var(--ease) .5s both; }
+  @keyframes lights-up { from { filter: brightness(.35) saturate(.5); } }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 }
 
-/* ---------- City page: inside, one room per city ---------- */
-.room-head { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
-.room-head::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 40% 90% at 88% 100%, rgba(240, 120, 90, .16), transparent 70%); }
-.room-in { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px; min-height: clamp(260px, 40vh, 400px); padding-block: 56px 48px; }
-.room-in .caps { color: var(--glow); }
-.room-title { margin-top: 16px; font-family: var(--font-serif); font-weight: 300; font-size: clamp(52px, 8vw, 112px); line-height: .95; letter-spacing: -.03em; }
+/* ---------- City page ---------- */
+.room-head { border-bottom: 1px solid var(--line); }
+.room-in { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px; min-height: clamp(220px, 34vh, 340px); padding-block: 48px 44px; }
+.room-region { font-size: 15px; color: var(--muted); }
+.room-title { margin-top: 10px; font-family: var(--font-serif); font-weight: 300; font-size: clamp(52px, 8vw, 112px); line-height: .95; letter-spacing: -.03em; }
 .room-title:focus { outline: none; }
-.room-title:focus-visible { outline: 2px solid var(--glow); outline-offset: 6px; }
-.room-count { margin-top: 18px; color: var(--muted); }
-/* a narrow lit doorway: the same coral room, seen from across the street */
-.slit { width: clamp(64px, 7vw, 96px); height: clamp(150px, 26vh, 230px); border: 6px solid var(--steel); border-bottom: 0; margin-bottom: -48px;
-  background: radial-gradient(ellipse 120% 70% at 50% 25%, var(--room-hi), var(--room) 45%, var(--room-lo)); box-shadow: 0 0 70px 6px rgba(238, 116, 88, .22); }
+.room-title:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 6px; }
+/* the same lit window, small, beside the name */
+.peek { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; width: clamp(110px, 12vw, 150px); height: clamp(140px, 22vh, 200px); margin-bottom: -44px; background: var(--oxblood); }
+.peek .pane:first-child, .peek .pane:nth-child(2) { height: 34px; }
+.peek .pane:nth-child(3) { grid-column: 1 / -1; }
+.peek { grid-template-rows: 34px 1fr; }
+.room-tiles { --t: 22px; height: 44px; border-top: 6px solid var(--oxblood); }
 
 /* The menu: each café on its own line. Only the name is the link (a short label for screen readers),
    but the whole row is clickable through a stretched ::after. */
@@ -175,42 +162,41 @@ main:not([hidden]) { animation: view-in .6s var(--ease) both; }
 .shop a { text-decoration: none; }
 .shop a::after { content: ""; position: absolute; inset: 0; }
 .shop-head { display: grid; grid-template-columns: 2.8em 1fr; column-gap: 4px; }
-.shop-head::before { content: counter(shop, decimal-leading-zero); grid-row: span 2; padding-top: .7em; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--faint); transition: color .2s; }
+.shop-head::before { content: counter(shop, decimal-leading-zero); grid-row: span 2; padding-top: .7em; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--muted); transition: color .2s; }
 .shop h2 { font-weight: 400; }
-.shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; letter-spacing: -.02em; transition: color .2s; }
+.shop .nm { display: block; font-family: var(--font-serif); font-size: clamp(32px, 3.8vw, 50px); line-height: 1.04; letter-spacing: -.02em; }
 .shop .meta { margin-top: 10px; font-size: 15px; color: var(--muted); }
 .shop .ext { display: inline-block; margin-left: .35em; transition: transform .25s var(--ease); }
 .shop-body { padding-top: .6em; }
-.shop .blurb { max-width: 48ch; line-height: 1.6; color: var(--ink); text-wrap: pretty; }
-.shop .note { max-width: 44ch; margin-top: 16px; padding-left: 16px; border-left: 1px solid var(--glow); font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.35; color: var(--glow); text-wrap: balance; }
-/* only the café under the pointer changes */
+.shop .blurb { max-width: 48ch; line-height: 1.6; text-wrap: pretty; }
+.shop .note { max-width: 44ch; margin-top: 14px; font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.35; color: var(--oxblood); text-wrap: balance; }
 .shop:hover .nm, .shop a:focus-visible .nm { font-style: italic; }
-.shop:hover .shop-head::before, .shop:has(a:focus-visible) .shop-head::before { color: var(--glow); }
+.shop:hover .shop-head::before, .shop:has(a:focus-visible) .shop-head::before { color: var(--oxblood); }
 .shop:hover .ext { transform: translate(2px, -2px); }
 .shop a:focus-visible { outline: none; }
-.shop:has(a:focus-visible) { outline: 2px solid var(--glow); outline-offset: 6px; }
+.shop:has(a:focus-visible) { outline: 2px solid var(--oxblood); outline-offset: 6px; }
 
-footer { color: var(--muted); background: var(--street); border-top: 1px solid var(--line); }
-footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding-block: 28px 40px; font-size: 14px; }
-.foot-cities { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; }
+footer { color: var(--muted); }
+footer .wrap { display: flex; justify-content: center; padding-block: 8px 32px; font-size: 14px; }
+.foot-cities { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; }
 .foot-cities li + li::before { content: "·"; content: "·" / ""; padding-inline: .5em; }
 .foot-cities a { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: transparent; transition: color .15s, text-decoration-color .15s; }
 .foot-cities a:hover, .foot-cities a:focus-visible, .foot-cities a[aria-current="page"] { color: var(--ink); text-decoration-color: currentColor; }
+.foot-tiles { --t: 28px; height: 84px; border-top: 6px solid var(--oxblood); }
 
 @media (max-width: 820px) {
   .top .wrap { flex-wrap: wrap; gap: 6px 12px; }
   .brand { flex: 1; }
   .tabs-box { order: 3; flex-basis: 100%; }
   .tabs { margin-left: 0; }
-  .front { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)); --door-x: 50%; }
-  .awning, .pavement { margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))); }
-  .sign { grid-row: 2; padding-block: 40px 8px; }
-  .door { grid-column: 1; grid-row: 3; height: auto; min-height: 0; margin: 32px auto 0; width: min(100%, 420px); padding-bottom: 72px; }
-  .menu { position: relative; top: auto; padding-top: 72px; }
-  .door::before { background-position: 0 40px, 0 0; }
-  .pavement { grid-row: 4; }
-  .room-in { grid-template-columns: 1fr; min-height: 220px; padding-block: 44px 36px; }
-  .slit { display: none; }
+  .shopfront { grid-template-columns: 1fr; }
+  .awning { margin-inline: -12px; }
+  .door { display: none; }
+  .window { min-height: 0; }
+  .transom { grid-template-columns: repeat(3, 1fr); }
+  .transom .pane:nth-child(4) { display: none; }
+  .room-in { grid-template-columns: 1fr; min-height: 200px; padding-block: 40px 32px; }
+  .peek { display: none; }
   .shops { padding-top: 0; }
   .shop { grid-template-columns: 1fr; padding-block: 30px 32px; }
   .shop-head { grid-template-columns: 2.4em 1fr; }
@@ -241,36 +227,40 @@ footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-cont
 </header>
 
 <main id="home-view" hidden>
-  <section class="front concrete" id="front">
-    <div class="awning" aria-hidden="true"></div>
-    <div class="sign">
-      <p class="caps" style="--i:0">Independent coffee · five cities</p>
-      <h1 class="mark" style="--i:1">Flâneur</h1>
-      <p class="lede" style="--i:2">A short list of cafés worth walking to. Independent shops only, all rated four stars or better.</p>
-      <p class="hours" style="--i:3" id="hours"></p>
-    </div>
-    <nav class="door" aria-label="Cities">
-      <div class="menu">
-        <p class="caps">Pick a city</p>
-        <ul id="door-menu"></ul>
+  <section class="front limestone" id="front">
+    <div class="facade">
+      <div class="shopfront">
+        <div class="awning">
+          <div class="canopy" aria-hidden="true"></div>
+          <div class="valance"><h1 class="mark">Flâneur</h1></div>
+        </div>
+        <div class="window">
+          <div class="transom" aria-hidden="true"><div class="pane"></div><div class="pane"></div><div class="pane"></div><div class="pane"></div></div>
+          <nav class="pane main-pane menu" aria-label="Cities"><ul id="door-menu"></ul></nav>
+        </div>
+        <div class="door" aria-hidden="true">
+          <div class="pane"></div>
+          <div class="panel"></div>
+          <span class="handle"></span>
+        </div>
       </div>
-      <div class="candles" aria-hidden="true"><i></i><i></i><i></i></div>
-    </nav>
+    </div>
+    <div class="base tiles" aria-hidden="true"></div>
     <div class="pavement" aria-hidden="true"></div>
   </section>
 </main>
 
 <main id="city-view" hidden>
-  <header class="room-head concrete">
+  <header class="room-head limestone">
     <div class="wrap room-in">
       <div>
-        <p class="caps" id="room-region"></p>
+        <p class="room-region" id="room-region"></p>
         <h1 class="room-title" id="city-title" tabindex="-1"></h1>
-        <p class="room-count" id="room-count"></p>
       </div>
-      <div class="slit" aria-hidden="true"></div>
+      <div class="peek" aria-hidden="true"><div class="pane"></div><div class="pane"></div><div class="pane"></div></div>
     </div>
   </header>
+  <div class="room-tiles tiles" aria-hidden="true"></div>
   <section class="wrap" aria-label="Cafés">
     <ul class="shops" id="shops"></ul>
   </section>
@@ -279,8 +269,8 @@ footer .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-cont
 <footer>
   <div class="wrap">
     <nav aria-label="All cities"><ul class="foot-cities" id="foot-cities"></ul></nav>
-    <p>Flâneur · independent coffee, Nov 2026</p>
   </div>
+  <div class="foot-tiles tiles" aria-hidden="true"></div>
 </footer>
 
 <script>
@@ -411,8 +401,6 @@ function updateNudges() {
 function renderIntro() {
   $("door-menu").innerHTML = CITIES.map((c) =>
     `<li><a href="#${c.id}"><span class="city">${esc(c.name)}</span><span class="n">${c.shops.length}<span class="sr-only"> ${c.shops.length === 1 ? "café" : "cafés"}</span></span></a></li>`).join("");
-  const total = CITIES.reduce((n, c) => n + c.shops.length, 0);
-  $("hours").textContent = `${total} cafés · updated Nov 2026`;
   // the lights come up once; later visits to home skip it
   $("front").addEventListener("animationend", (e) => {
     if (e.animationName === "lights-up") $("front").classList.add("lit");
@@ -427,8 +415,7 @@ const reveal = "IntersectionObserver" in window ? new IntersectionObserver((entr
 function renderCity() {
   const c = state.city;
   $("city-title").textContent = c.name;
-  $("room-region").textContent = c.region;
-  $("room-count").textContent = count(c.shops.length);
+  $("room-region").textContent = `${c.region} · ${count(c.shops.length)}`;
   $("shops").innerHTML = c.shops.map((s, i) => `
     <li class="shop" style="--d:${Math.min(i, 6) * 90}ms">
       <div class="shop-head">
