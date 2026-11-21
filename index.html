@@ -12,20 +12,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600&family=Covered+By+Your+Grace&display=swap">
 <style>
-/* Flâneur: black ink on one plain off-white page. Nothing else for now.
+/* Flâneur: off-white on one plain black page. Nothing else for now.
    Type: Schibsted Grotesk; Covered By Your Grace stands in for the hand-lettered logo until the real one
    is ready. Both free from Google Fonts. */
 :root {
-  --paper: #FBFBF9;
-  --ink: #151515;
-  --muted: #6E6E6B;     /* 5:1 on the paper */
-  --hair: #CFCFCB;
-  --rule: #9C9C98;
+  --paper: #000000;     /* matches the portrait's black so it bleeds into the page */
+  --ink: #F2F2EE;
+  --muted: #9A9A96;     /* 7:1 on black */
+  --hair: #2A2A2A;
+  --rule: #444444;
   --gutter: clamp(14px, 1.6vw, 22px);
   --ease: cubic-bezier(.22, 1, .36, 1);
   --font-sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-hand: "Covered By Your Grace", "Bradley Hand", cursive;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -56,7 +56,7 @@ a { color: inherit; text-decoration: none; }
 
 /* the picture: the flâneur, drawn in pencil on grey */
 /* the flâneur: a two-tone stencil portrait (flaneur.png), black ground and white highlights */
-.portrait { display: block; margin: 0 auto; width: min(460px, 100%); height: auto; }
+.portrait { display: block; margin: 0 auto; width: min(520px, 100%); height: auto; }
 
 
 .body { align-items: start; padding-top: 16px; }
@@ -104,7 +104,7 @@ main:not([hidden]) { animation: view-in .5s var(--ease) both; }
   <main id="home-view" hidden>
     <h1 class="sr-only">Flâneur</h1>
     <div class="grid body">
-      <div class="pic"><img class="portrait" src="flaneur.png" width="660" height="850" alt="Black and white stencil portrait of a flâneur in a bowler hat, smoking a cigarette"></div>
+      <div class="pic"><img class="portrait" src="flaneur.png" width="620" height="880" alt="Black and white stencil portrait of a flâneur in a bowler hat, smoking a cigarette"></div>
     </div>
   </main>
 
